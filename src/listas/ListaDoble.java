@@ -9,7 +9,8 @@ public class ListaDoble<Tipo> {
     }
 
     /*------------------------------------- insertar por el primero------------------------------------------------- */
-    public ListaDoble insertarPrimero(Tipo dato){
+    public ListaDoble insertarPrimero(Tipo dato) throws Exception{
+        datoIUnico(dato);
         NodoDoble nuevo = new NodoDoble(dato);
         if (primero != null){ /* Si la lista no esta vacia */
             nuevo.setSiguiente(primero); /*modificador*/
@@ -34,7 +35,8 @@ public class ListaDoble<Tipo> {
         return this;
     }
     /*---------------------------------------Insertar final-----------------------------------------------------------*/
-    public ListaDoble insertarFinal(Tipo dato){
+    public ListaDoble insertarFinal(Tipo dato) throws Exception{
+        datoIUnico(dato);
         NodoDoble nuevo = new NodoDoble(dato);
         if (primero != null){ /* Si la lista no esta vacia */
             NodoDoble aux = primero;
@@ -77,6 +79,7 @@ public class ListaDoble<Tipo> {
     /*---------------------------------------Insertar Antes Elemento Buscado------------------------------------------*/
     public ListaDoble insertarAntesElementoB(Tipo datoI, Tipo datoB) throws Exception {
         exeptionListaVacia(); /*No se puede insertar antes de una lista vacia*/
+        datoIUnico(datoI);
         NodoDoble nuevo = new NodoDoble(datoI);
         NodoDoble aux = primero;
         aux = recorrerElementoBuscado(aux, datoB);/*Si existe devuelve el elemnto en esa posicion caso contrario retorna excepcion*/
@@ -115,6 +118,7 @@ public class ListaDoble<Tipo> {
     /*---------------------------------------Insertar despues Elemento Buscado------------------------------------------*/
     public ListaDoble insertarDespuesElementoB(Tipo datoI, Tipo datoB) throws Exception {
         exeptionListaVacia();
+        datoIUnico(datoI);
         NodoDoble aux = primero;
         aux = recorrerElementoBuscado(aux, datoB);
         NodoDoble nuevo = new NodoDoble(datoI);
@@ -183,10 +187,10 @@ public class ListaDoble<Tipo> {
         return aux;
     }
     public NodoDoble recorrerElementoBuscado(NodoDoble aux, Tipo datoB) throws Exception {
-        while (aux.getDato() != datoB && aux.getSiguiente() != null){
+        while (!aux.getDato().equals(datoB) && aux.getSiguiente() != null){
             aux = aux.getSiguiente();
         }
-        if (aux.getDato() != datoB){
+        if (!aux.getDato().equals(datoB)){
             throw new Exception("No se encontro el elemento Buscado");
         }
         return aux;
@@ -232,6 +236,28 @@ public class ListaDoble<Tipo> {
         }
         
         return (Tipo) actual.getDato();
+    }
+    public Tipo getElementoBuscado(Tipo datoB) throws Exception {
+        exeptionListaVacia();
+        NodoDoble aux = primero;
+        while (!aux.getDato().equals(datoB) && aux.getSiguiente() != null){
+            aux = aux.getSiguiente();
+        }
+        if (!aux.getDato().equals(datoB) ){
+            throw new Exception("No se encontro el elemento Buscado");
+        }
+        return (Tipo) aux.getDato();
+    }
+    private void datoIUnico(Tipo datoI) throws Exception{
+        if(primero != null){
+            NodoDoble actual = primero;
+            while (!actual.getDato().equals(datoI) && actual.getSiguiente() != null) {
+                actual = actual.getSiguiente();
+            }
+            if (actual.getDato().equals(datoI)) {
+                throw new Exception("El alumno ya existe no se puede insertar");
+            }
+        }   
     }
 
 

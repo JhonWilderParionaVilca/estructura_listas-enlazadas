@@ -118,7 +118,7 @@ public class Main extends javax.swing.JFrame {
         btnInsertarAntesD = new javax.swing.JButton();
         btnInsertarDespuesD = new javax.swing.JButton();
         btnEliminarAntesD = new javax.swing.JButton();
-        jButton20 = new javax.swing.JButton();
+        btnELiminarDespuesD = new javax.swing.JButton();
         Lista1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tableListaDoble = new javax.swing.JTable();
@@ -550,6 +550,11 @@ public class Main extends javax.swing.JFrame {
         buscado1.add(jLabel17, java.awt.BorderLayout.PAGE_START);
 
         btnEliminarBuscadoD.setText("Eliminar Elemento Buscado");
+        btnEliminarBuscadoD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarBuscadoDActionPerformed(evt);
+            }
+        });
         buscado1.add(btnEliminarBuscadoD, java.awt.BorderLayout.PAGE_END);
 
         jPanel5.setLayout(new java.awt.GridLayout(2, 0, 0, 5));
@@ -574,6 +579,11 @@ public class Main extends javax.swing.JFrame {
         jPanel9.add(jPanel10);
 
         btnBuscarDoble.setText("Buscar");
+        btnBuscarDoble.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarDobleActionPerformed(evt);
+            }
+        });
         jPanel9.add(btnBuscarDoble);
 
         jPanel5.add(jPanel9);
@@ -582,17 +592,37 @@ public class Main extends javax.swing.JFrame {
 
         btnInsertarAntesD.setText("Insertar Antes");
         btnInsertarAntesD.setEnabled(false);
+        btnInsertarAntesD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertarAntesDActionPerformed(evt);
+            }
+        });
         btnEliminarDespuesD.add(btnInsertarAntesD);
 
         btnInsertarDespuesD.setText("Insertar Despues");
         btnInsertarDespuesD.setEnabled(false);
+        btnInsertarDespuesD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertarDespuesDActionPerformed(evt);
+            }
+        });
         btnEliminarDespuesD.add(btnInsertarDespuesD);
 
         btnEliminarAntesD.setText("Eliminar Antes");
+        btnEliminarAntesD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAntesDActionPerformed(evt);
+            }
+        });
         btnEliminarDespuesD.add(btnEliminarAntesD);
 
-        jButton20.setText("Eliminar Despues");
-        btnEliminarDespuesD.add(jButton20);
+        btnELiminarDespuesD.setText("Eliminar Despues");
+        btnELiminarDespuesD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnELiminarDespuesDActionPerformed(evt);
+            }
+        });
+        btnEliminarDespuesD.add(btnELiminarDespuesD);
 
         jPanel5.add(btnEliminarDespuesD);
 
@@ -618,6 +648,11 @@ public class Main extends javax.swing.JFrame {
             }
         ));
         tableListaDoble.getTableHeader().setReorderingAllowed(false);
+        tableListaDoble.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableListaDobleMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tableListaDoble);
 
         Lista1.add(jScrollPane4, java.awt.BorderLayout.CENTER);
@@ -851,7 +886,7 @@ public class Main extends javax.swing.JFrame {
             limpiarCampos();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
             System.out.println(e);
         }
         
@@ -1011,7 +1046,7 @@ public class Main extends javax.swing.JFrame {
             limpiarCampos();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
             System.out.println(e);
         }
     }//GEN-LAST:event_btnInsertarFinalActionPerformed
@@ -1026,7 +1061,7 @@ public class Main extends javax.swing.JFrame {
                 //imprimir tabla
                 imprimirjTable();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarPrimeroActionPerformed
 
@@ -1040,12 +1075,12 @@ public class Main extends javax.swing.JFrame {
                 //imprimir tabla
                 imprimirjTable();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarFinalActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
+
         try {
             // obtener el codigo ingresado
             String codigo = txtCodigoB.getText();
@@ -1067,7 +1102,7 @@ public class Main extends javax.swing.JFrame {
                 }
             ));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -1090,7 +1125,7 @@ public class Main extends javax.swing.JFrame {
             Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
             //agregamos a la lista
             System.out.println("-----------------------Insertar Antes Elemento Buscado---------------------------------");
-            estudiantes.insertarAntesElementoBuscado(estudianteB, estudiante);
+            estudiantes.insertarAntesElementoBuscado(estudiante, estudianteB);
             System.out.println(estudiantes);
             //imprimir tabla
             imprimirjTable();
@@ -1098,11 +1133,8 @@ public class Main extends javax.swing.JFrame {
             limpiarCampos();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
-        
-        
-        
     }//GEN-LAST:event_btnInsertarAntesActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
@@ -1143,7 +1175,7 @@ public class Main extends javax.swing.JFrame {
             String apellido = txtApellidoD.getText();
             int edad = Integer.parseInt(txtEdadD.getText());
 
-            //verificar todos los datos
+            //verificar
             verificarCodigoEdad(codigo, edad);
             //crear al objeto
             Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
@@ -1153,12 +1185,11 @@ public class Main extends javax.swing.JFrame {
 
             //imprimir tabla
             imprimirjTableD();
-
             //limpiar campos
             limpiarCamposD();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnInsertarPrimeroDActionPerformed
 
@@ -1170,7 +1201,7 @@ public class Main extends javax.swing.JFrame {
             String apellido = txtApellidoD.getText();
             int edad = Integer.parseInt(txtEdadD.getText());
 
-            //verificar todos los datos
+            //verificar
             verificarCodigoEdad(codigo, edad);
             //crear al objeto
             Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
@@ -1181,12 +1212,11 @@ public class Main extends javax.swing.JFrame {
 
             //imprimir tabla
             imprimirjTableD();
-
             //LIMPIAR CAMPOS
             limpiarCamposD();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnInsertarFinalDActionPerformed
 
@@ -1199,7 +1229,7 @@ public class Main extends javax.swing.JFrame {
                 //imprimir tabla
                 imprimirjTableD();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarPrimeroDActionPerformed
 
@@ -1212,7 +1242,7 @@ public class Main extends javax.swing.JFrame {
                 //imprimir tabla
                 imprimirjTableD();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarFinalDActionPerformed
 
@@ -1253,7 +1283,7 @@ public class Main extends javax.swing.JFrame {
                 //imprimir tabla
                 imprimirjTableC();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarInicioCActionPerformed
 
@@ -1266,7 +1296,7 @@ public class Main extends javax.swing.JFrame {
                 //imprimir tabla
                 imprimirjTableC();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarFinalCActionPerformed
 
@@ -1318,7 +1348,7 @@ public class Main extends javax.swing.JFrame {
             Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
             //agregamos a la lista
             System.out.println("-----------------------Insertar Despues Elemento Buscado---------------------------------");
-            estudiantes.insertarDespuesElementoBuscado(estudianteB, estudiante);
+            estudiantes.insertarDespuesElementoBuscado(estudiante,estudianteB);
             System.out.println(estudiantes);
             //imprimir tabla
             imprimirjTable();
@@ -1326,7 +1356,7 @@ public class Main extends javax.swing.JFrame {
             limpiarCampos();
             
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnInsertarDespuesActionPerformed
 
@@ -1348,7 +1378,7 @@ public class Main extends javax.swing.JFrame {
             //imprimir tabla
             imprimirjTable();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarAntesActionPerformed
 
@@ -1366,7 +1396,7 @@ public class Main extends javax.swing.JFrame {
             //imprimir tabla
             imprimirjTable();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarDespuesActionPerformed
 
@@ -1384,7 +1414,7 @@ public class Main extends javax.swing.JFrame {
             //imprimir tabla
             imprimirjTable();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarBuscadoActionPerformed
 
@@ -1471,6 +1501,149 @@ public class Main extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtApellidoCKeyTyped
+
+    private void btnInsertarAntesDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarAntesDActionPerformed
+        try {          
+            //obtener los datos del alumno a ingresar
+            String codigo = txtCodigoD.getText();
+            String nombre = txtNombreD.getText();
+            String apellido = txtApellidoD.getText();
+            int edad = Integer.parseInt(txtEdadD.getText());
+            String datoB = txtCodigoBD.getText();
+            //verificar todos los datos
+            verificarCodigoEdad(codigo, edad);
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //crear al objeto
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            //agregamos a la lista
+            System.out.println("-----------------------Insertar Antes Elemento Buscado Doble---------------------------------");
+            estudiantesD.insertarAntesElementoB(estudiante,estudianteB);
+            System.out.println(estudiantesD);
+            //imprimir tabla
+            imprimirjTableD();
+            //limpiar el formulario
+            limpiarCamposD();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnInsertarAntesDActionPerformed
+
+    private void btnInsertarDespuesDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarDespuesDActionPerformed
+        try {          
+            //obtener los datos del alumno a ingresar
+            String codigo = txtCodigoD.getText();
+            String nombre = txtNombreD.getText();
+            String apellido = txtApellidoD.getText();
+            int edad = Integer.parseInt(txtEdadD.getText());
+            String datoB = txtCodigoBD.getText();
+            //verificar todos los datos
+            verificarCodigoEdad(codigo, edad);
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //crear al objeto
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            //agregamos a la lista
+            System.out.println("-----------------------Insertar Despues Elemento Buscado Doble---------------------------------");
+            estudiantesD.insertarDespuesElementoB(estudiante,estudianteB);
+            System.out.println(estudiantesD);
+            //imprimir tabla
+            imprimirjTableD();
+            //limpiar el formulario
+            limpiarCamposD();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnInsertarDespuesDActionPerformed
+
+    private void btnBuscarDobleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDobleActionPerformed
+        try {
+            // obtener el codigo ingresado
+            String codigo = txtCodigoBD.getText();
+            verificarCodigoB(codigo);
+            Estudiante datoB = new Estudiante(codigo, "", "", 0);
+            Estudiante e1 = estudiantesD.getElementoBuscado(datoB);
+
+            Object [][] data = new Object[1][4];
+            data[0][0]= e1.getCodigo();
+            data[0][1]= e1.getNombre();
+            data[0][2]= e1.getApellido();
+            data[0][3]= e1.getEdad();
+
+
+            tableListaDoble.setModel(new javax.swing.table.DefaultTableModel(
+                data,
+                new String [] {
+                    "Código", "Nombre", "Apellido", "Edad"
+                }
+            ));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnBuscarDobleActionPerformed
+
+    private void tableListaDobleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableListaDobleMouseClicked
+        int select = tableListaDoble.rowAtPoint(evt.getPoint());
+        txtCodigoBD.setText(String.valueOf(tableListaDoble.getValueAt(select, 0)));
+    }//GEN-LAST:event_tableListaDobleMouseClicked
+
+    private void btnEliminarAntesDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAntesDActionPerformed
+        try {          
+            String datoB = txtCodigoBD.getText();
+            //verificar datoB
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //Eliminamos
+            System.out.println("-----------------------Eliminar Antes Elemento Buscado Doble---------------------------------");
+            estudiantesD.eliminarAntesElementoB(estudianteB);
+            System.out.println(estudiantesD);
+            //imprimir tabla
+            imprimirjTableD();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarAntesDActionPerformed
+
+    private void btnELiminarDespuesDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnELiminarDespuesDActionPerformed
+        try {          
+            String datoB = txtCodigoBD.getText();
+            //verificar datoB
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //Eliminamos
+            System.out.println("-----------------------Eliminar Despues Elemento Buscado Doble---------------------------------");
+            estudiantesD.eliminarDespuesElementoB(estudianteB);
+            System.out.println(estudiantesD);
+            //imprimir tabla
+            imprimirjTableD();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnELiminarDespuesDActionPerformed
+
+    private void btnEliminarBuscadoDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarBuscadoDActionPerformed
+        try {          
+            String datoB = txtCodigoBD.getText();
+            //verificar datoB
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //Eliminamos
+            System.out.println("-----------------------Eliminar Elemento Buscado Doble---------------------------------");
+            estudiantesD.eliminarElementoBuscado(estudianteB);
+            System.out.println(estudiantesD);
+            //imprimir tabla
+            imprimirjTableD();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarBuscadoDActionPerformed
     
     
     private void limpiarCampos(){
@@ -1488,12 +1661,19 @@ public class Main extends javax.swing.JFrame {
         txtNombreD.setText("");
         txtApellidoD.setText("");
         txtEdadD.setText("");
+        btnInsertarPrimeroD.setEnabled(false);
+        btnInsertarFinalD.setEnabled(false);
+        btnInsertarAntesD.setEnabled(false);
+        btnInsertarDespuesD.setEnabled(false);
     }
     private void limpiarCamposC(){
         txtCodigoC.setText("");
         txtNombreC.setText("");
         txtApellidoC.setText("");
         txtEdadC.setText("");
+        btnInsertarPrimeroC.setEnabled(false);
+        btnInsertarFinalC.setEnabled(false);
+        
     }
     
     private void imprimirjTable(){
@@ -1662,6 +1842,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel botones2;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarDoble;
+    private javax.swing.JButton btnELiminarDespuesD;
     private javax.swing.JButton btnEliminarAntes;
     private javax.swing.JButton btnEliminarAntesD;
     private javax.swing.JButton btnEliminarBuscado;
@@ -1691,7 +1872,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel inputs;
     private javax.swing.JPanel inputs1;
     private javax.swing.JPanel inputs2;
-    private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
     private javax.swing.JButton jButton27;
