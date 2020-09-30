@@ -19,7 +19,7 @@ import listas.ListaSimple;
  */
 public class Main extends javax.swing.JFrame {
 
-    //inicializamos las listas
+    //inicializamos las listas manera global
     ListaSimple<Estudiante> estudiantes = new ListaSimple<>();
     ListaDoble<Estudiante> estudiantesD = new ListaDoble<>();
     ListaCircular<Estudiante> estudiantesC = new ListaCircular<>();
@@ -28,12 +28,14 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
-        //para q solo se pueda seleccionar una sola fila
+        //para q solo se pueda seleccionar una sola fila jtable
         tableListaSimple.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableListaDoble.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tableCircular.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -73,7 +75,7 @@ public class Main extends javax.swing.JFrame {
         txtEdad = new javax.swing.JTextField();
         buscado = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        btnEliminarB = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
@@ -82,9 +84,9 @@ public class Main extends javax.swing.JFrame {
         btnBuscarLSimple = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btninsertarAntes = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
+        btnInsertarDespues = new javax.swing.JButton();
+        btnEliminarAntes = new javax.swing.JButton();
+        btnEliminarDespues = new javax.swing.JButton();
         LDoble = new javax.swing.JPanel();
         metodos1 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
@@ -227,6 +229,7 @@ public class Main extends javax.swing.JFrame {
         botones.setLayout(new java.awt.GridLayout(2, 2, 5, 5));
 
         btnSInsertarInicio.setText("Insertar Inicio");
+        btnSInsertarInicio.setEnabled(false);
         btnSInsertarInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSInsertarInicioActionPerformed(evt);
@@ -235,6 +238,7 @@ public class Main extends javax.swing.JFrame {
         botones.add(btnSInsertarInicio);
 
         btnInsertarFinal.setText("Insertar Final");
+        btnInsertarFinal.setEnabled(false);
         btnInsertarFinal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInsertarFinalActionPerformed(evt);
@@ -275,6 +279,9 @@ public class Main extends javax.swing.JFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoKeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyReleased(evt);
+            }
         });
         inputs.add(txtCodigo);
 
@@ -286,10 +293,21 @@ public class Main extends javax.swing.JFrame {
                 txtNombreActionPerformed(evt);
             }
         });
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreKeyReleased(evt);
+            }
+        });
         inputs.add(txtNombre);
 
         jLabel8.setText("Apellido");
         inputs.add(jLabel8);
+
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyReleased(evt);
+            }
+        });
         inputs.add(txtApellido);
 
         jLabel9.setText("Edad");
@@ -298,6 +316,9 @@ public class Main extends javax.swing.JFrame {
         txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtEdadKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEdadKeyReleased(evt);
             }
         });
         inputs.add(txtEdad);
@@ -312,8 +333,13 @@ public class Main extends javax.swing.JFrame {
         jLabel10.setText("Elemento Buscado");
         buscado.add(jLabel10, java.awt.BorderLayout.PAGE_START);
 
-        jButton5.setText("Eliminar Elemento Buscado");
-        buscado.add(jButton5, java.awt.BorderLayout.PAGE_END);
+        btnEliminarB.setText("Eliminar Elemento Buscado");
+        btnEliminarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarBActionPerformed(evt);
+            }
+        });
+        buscado.add(btnEliminarB, java.awt.BorderLayout.PAGE_END);
 
         jPanel2.setLayout(new java.awt.GridLayout(2, 0, 0, 5));
 
@@ -324,9 +350,19 @@ public class Main extends javax.swing.JFrame {
         jLabel11.setText("Código");
         jPanel7.add(jLabel11);
 
+        txtCodigoB.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                txtCodigoBInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
         txtCodigoB.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoBKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodigoBKeyReleased(evt);
             }
         });
         jPanel7.add(txtCodigoB);
@@ -346,6 +382,7 @@ public class Main extends javax.swing.JFrame {
         jPanel4.setLayout(new java.awt.GridLayout(2, 2, 5, 5));
 
         btninsertarAntes.setText("Insertar Antes");
+        btninsertarAntes.setEnabled(false);
         btninsertarAntes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btninsertarAntesActionPerformed(evt);
@@ -353,14 +390,30 @@ public class Main extends javax.swing.JFrame {
         });
         jPanel4.add(btninsertarAntes);
 
-        jButton9.setText("Insertar Despues");
-        jPanel4.add(jButton9);
+        btnInsertarDespues.setText("Insertar Despues");
+        btnInsertarDespues.setEnabled(false);
+        btnInsertarDespues.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertarDespuesActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnInsertarDespues);
 
-        jButton8.setText("Eliminar Antes");
-        jPanel4.add(jButton8);
+        btnEliminarAntes.setText("Eliminar Antes");
+        btnEliminarAntes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarAntesActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnEliminarAntes);
 
-        jButton10.setText("Eliminar Despues");
-        jPanel4.add(jButton10);
+        btnEliminarDespues.setText("Eliminar Despues");
+        btnEliminarDespues.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarDespuesActionPerformed(evt);
+            }
+        });
+        jPanel4.add(btnEliminarDespues);
 
         jPanel2.add(jPanel4);
 
@@ -738,32 +791,21 @@ public class Main extends javax.swing.JFrame {
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
             int edad = Integer.parseInt(txtEdad.getText());
-
-            //verificar todos los datos
-            if (!verificaFaltaDatos(codigo, nombre, apellido, edad)) {
-                //crear al objeto
-                Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
-
-                //agregamos a la lista
-                if (verificarCodigoUnico(codigo)) {
-                    System.out.println("--------------------------Insertar por el primero-----------------------------------------");
-                    estudiantes.insertarPrimero(estudiante);
-                    System.out.println(estudiantes);
-
-                    //imprimir tabla
-                    imprimirjTable();
-                    //limpiar
-                    limpiarCampos();
-                }else{
-                    JOptionPane.showMessageDialog(null, "El estudiante ya existe", "Error", ERROR_MESSAGE);
-                }
-                
-
-            }else{
-                JOptionPane.showMessageDialog(null, "Ingrese los adtos correctamente");
-            }
+            //verificamos codigo 8 digitos y la edad mayor 10
+            verificarCodigoEdad(codigo, edad);
+            //crear al objeto
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            System.out.println("--------------------------Insertar por el primero-----------------------------------------");
+            estudiantes.insertarPrimero(estudiante);
+            System.out.println(estudiantes);
+            //imprimir tabla
+            imprimirjTable();
+            //limpiar
+            limpiarCampos();
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            System.out.println(e);
         }
         
     }//GEN-LAST:event_btnSInsertarInicioActionPerformed
@@ -903,38 +945,27 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_tableListaSimpleFocusGained
 
     private void btnInsertarFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarFinalActionPerformed
-        // TODO add your handling code here:
         try {
             //obtener los datos
             String codigo = txtCodigo.getText();
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
             int edad = Integer.parseInt(txtEdad.getText());
-
-            //verificar todos los datos
-            if (!verificaFaltaDatos(codigo, nombre, apellido, edad)) {
-                //crear al objeto
-                Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
-                
-                if (verificarCodigoUnico(codigo)) {
-                    //agregamos a la lista
-                    System.out.println("-----------------------Insertar por el final---------------------------------");
-                    estudiantes.insertarFinal(estudiante);
-                    System.out.println(estudiantes);
-
-                    //imprimir tabla
-                    imprimirjTable();
-                    //limpiar
-                    limpiarCampos();
-                }else{
-                    JOptionPane.showMessageDialog(null, "El estudiante ya existe", "Error", ERROR_MESSAGE);
-                }
-
-            }else{
-                JOptionPane.showMessageDialog(null, "Ingrese los adtos correctamente");
-            }
+            //verificamos codigo 8 digitos y la edad mayor 10
+            verificarCodigoEdad(codigo, edad);
+            //crear al objeto
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            System.out.println("--------------------------Insertar por el Final-----------------------------------------");
+            estudiantes.insertarFinal(estudiante);
+            System.out.println(estudiantes);
+            //imprimir tabla
+            imprimirjTable();
+            //limpiar
+            limpiarCampos();
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+            System.out.println(e);
         }
     }//GEN-LAST:event_btnInsertarFinalActionPerformed
 
@@ -967,71 +998,60 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarFinalActionPerformed
 
     private void btnBuscarLSimpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLSimpleActionPerformed
-        // TODO add your handling code here:
-        // obtener el codigo ingresado
-        String codigo = txtCodigoB.getText();
-        int filas = estudiantes.getTamanio();
-        String [] columnas = {
-            "Código", "Nombre", "Apellido", "Edad"
-        };
-        Object [][] data = new Object[1][4];
+        
+        try {
+            // obtener el codigo ingresado
+            String codigo = txtCodigoB.getText();
+            verificarCodigoB(codigo);
+            Estudiante datoB = new Estudiante(codigo, "", "", 0);
+            Estudiante e1 = estudiantes.getElementoBuscado(datoB);
+
+            Object [][] data = new Object[1][4];
+            data[0][0]= e1.getCodigo();
+            data[0][1]= e1.getNombre();
+            data[0][2]= e1.getApellido();
+            data[0][3]= e1.getEdad();
 
 
-        for (int i = 0; i < filas ; i++) {
-            Estudiante e1 = estudiantes.getDatoIndex(i);
-            if (codigo.equals(e1.getCodigo())) {
-                data[0][0]= e1.getCodigo();
-                data[0][1]= e1.getNombre();
-                data[0][2]= e1.getApellido();
-                data[0][3]= e1.getEdad();
-            }
+            tableListaSimple.setModel(new javax.swing.table.DefaultTableModel(
+                data,
+                new String [] {
+                    "Código", "Nombre", "Apellido", "Edad"
+                }
+            ));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
         }
-
-        tableListaSimple.setModel(new javax.swing.table.DefaultTableModel(
-            data,
-            new String [] {
-                "Código", "Nombre", "Apellido", "Edad"
-            }
-        ));
+        
     }//GEN-LAST:event_btnBuscarLSimpleActionPerformed
 
     private void btninsertarAntesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertarAntesActionPerformed
         // TODO add your handling code here:
-       
-        try {
-            Estudiante estudianteB = null;
-            if (tableListaSimple.getSelectedRow() != -1) {
-                int index = tableListaSimple.getSelectedRow();
-                estudianteB = estudiantes.getDatoIndex(index);
-            }
-            //obtener los datos
+        try {          
+            //obtener los datos del alumno a ingresar
             String codigo = txtCodigo.getText();
             String nombre = txtNombre.getText();
             String apellido = txtApellido.getText();
             int edad = Integer.parseInt(txtEdad.getText());
-
+            String datoB = txtCodigoB.getText();
             //verificar todos los datos
-            if (!verificaFaltaDatos(codigo, nombre, apellido, edad)) {
-                //crear al objeto
-                Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
-                
-                if (verificarCodigoUnico(codigo)) {
-                    //agregamos a la lista
-                    System.out.println("-----------------------Insertar Antes Elemento Buscado---------------------------------");
-                    estudiantes.insertarAntesElementoBuscado(estudianteB, estudiante);
-                    System.out.println(estudiantes);
-
-                    //imprimir tabla
-                    imprimirjTable();
-                }else{
-                    JOptionPane.showMessageDialog(null, "El estudiante ya existe", "Error", ERROR_MESSAGE);
-                }
-
-            }else{
-                JOptionPane.showMessageDialog(null, "Ingrese los adtos correctamente");
-            }
+            verificarCodigoEdad(codigo, edad);
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //crear al objeto
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            //agregamos a la lista
+            System.out.println("-----------------------Insertar Antes Elemento Buscado---------------------------------");
+            estudiantes.insertarAntesElementoBuscado(estudianteB, estudiante);
+            System.out.println(estudiantes);
+            //imprimir tabla
+            imprimirjTable();
+            //limpiar el formulario
+            limpiarCampos();
+            
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
         }
         
         
@@ -1051,29 +1071,18 @@ public class Main extends javax.swing.JFrame {
             int edad = Integer.parseInt(txtEdadC.getText());
 
             //verificar todos los datos
-            if (!verificaFaltaDatos(codigo, nombre, apellido, edad)) {
-                //crear al objeto
-                Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            verificarCodigoEdad(codigo,edad);
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            System.out.println("--------------------------Insertar por el primero LCircular-----------------------------------------");
+            estudiantesC.insertarPrimero(estudiante);
+            System.out.println(estudiantesC);
 
-                //agregamos a la lista
-                if (verificarCodigoUnicoC(codigo)) {
-                    System.out.println("--------------------------Insertar por el primero LCircular-----------------------------------------");
-                    estudiantesC.insertarPrimero(estudiante);
-                    System.out.println(estudiantesC);
+            //imprimir tabla
+            imprimirjTableC();
 
-                    //imprimir tabla
-                    imprimirjTableC();
-                    
-                    //limpiar campos
-                    limpiarCamposC();
-                }else{
-                    JOptionPane.showMessageDialog(null, "El estudiante ya existe", "Error", ERROR_MESSAGE);
-                }
-                
-
-            }else{
-                JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
-            }
+            //limpiar campos
+            limpiarCamposC();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
         }
@@ -1088,29 +1097,19 @@ public class Main extends javax.swing.JFrame {
             int edad = Integer.parseInt(txtEdadD.getText());
 
             //verificar todos los datos
-            if (!verificaFaltaDatos(codigo, nombre, apellido, edad)) {
-                //crear al objeto
-                Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            verificarCodigoEdad(codigo, edad);
+            //crear al objeto
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            System.out.println("--------------------------Insertar por el primero LD-----------------------------------------");
+            estudiantesD.insertarPrimero(estudiante);
+            System.out.println(estudiantesD);
 
-                //agregamos a la lista
-                if (verificarCodigoUnicoD(codigo)) {
-                    System.out.println("--------------------------Insertar por el primero LD-----------------------------------------");
-                    estudiantesD.insertarPrimero(estudiante);
-                    System.out.println(estudiantesD);
+            //imprimir tabla
+            imprimirjTableD();
 
-                    //imprimir tabla
-                    imprimirjTableD();
-                    
-                    //limpiar campos
-                    limpiarCamposD();
-                }else{
-                    JOptionPane.showMessageDialog(null, "El estudiante ya existe", "Error", ERROR_MESSAGE);
-                }
-                
-
-            }else{
-                JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
-            }
+            //limpiar campos
+            limpiarCamposD();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
         }
@@ -1125,29 +1124,20 @@ public class Main extends javax.swing.JFrame {
             int edad = Integer.parseInt(txtEdadD.getText());
 
             //verificar todos los datos
-            if (!verificaFaltaDatos(codigo, nombre, apellido, edad)) {
-                //crear al objeto
-                Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
-                
-                if (verificarCodigoUnicoD(codigo)) {
-                    //agregamos a la lista
-                    System.out.println("-----------------------Insertar por el final Doble---------------------------------");
-                    estudiantesD.insertarFinal(estudiante);
-                    System.out.println(estudiantesD);
+            verificarCodigoEdad(codigo, edad);
+            //crear al objeto
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            //agregamos a la lista
+            System.out.println("-----------------------Insertar por el final Doble---------------------------------");
+            estudiantesD.insertarFinal(estudiante);
+            System.out.println(estudiantesD);
 
-                    //imprimir tabla
-                    imprimirjTableD();
-                    
-                    //LIMPIAR CAMPOS
-                    limpiarCamposD();
-                    
-                }else{
-                    JOptionPane.showMessageDialog(null, "El estudiante ya existe", "Error", ERROR_MESSAGE);
-                }
+            //imprimir tabla
+            imprimirjTableD();
 
-            }else{
-                JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
-            }
+            //LIMPIAR CAMPOS
+            limpiarCamposD();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
         }
@@ -1188,29 +1178,20 @@ public class Main extends javax.swing.JFrame {
             int edad = Integer.parseInt(txtEdadC.getText());
 
             //verificar todos los datos
-            if (!verificaFaltaDatos(codigo, nombre, apellido, edad)) {
-                //crear al objeto
-                Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
-                
-                if (verificarCodigoUnicoC(codigo)) {
-                    //agregamos a la lista
-                    System.out.println("-----------------------Insertar por el final Circular---------------------------------");
-                    estudiantesC.insertarFinal(estudiante);
-                    System.out.println(estudiantesC);
+            verificarCodigoEdad(codigo,  edad);
+            //crear al objeto
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            //agregamos a la lista
+            System.out.println("-----------------------Insertar por el final Circular---------------------------------");
+            estudiantesC.insertarFinal(estudiante);
+            System.out.println(estudiantesC);
 
-                    //imprimir tabla
-                    imprimirjTableC();
-                    
-                    //LIMPIAR CAMPOS
-                    limpiarCamposC();
-                    
-                }else{
-                    JOptionPane.showMessageDialog(null, "El estudiante ya existe", "Error", ERROR_MESSAGE);
-                }
+            //imprimir tabla
+            imprimirjTableC();
 
-            }else{
-                JOptionPane.showMessageDialog(null, "Ingrese los datos correctamente");
-            }
+            //LIMPIAR CAMPOS
+            limpiarCamposC();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
         }
@@ -1247,6 +1228,118 @@ public class Main extends javax.swing.JFrame {
         int select = tableListaSimple.rowAtPoint(evt.getPoint());
         txtCodigoB.setText(String.valueOf(tableListaSimple.getValueAt(select, 0)));
     }//GEN-LAST:event_tableListaSimpleMouseClicked
+
+    private void txtCodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyReleased
+        // TODO add your handling code here:
+        habilitarInsertarS();
+        habilitarInsertarAntesS();
+    }//GEN-LAST:event_txtCodigoKeyReleased
+
+    private void txtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyReleased
+        habilitarInsertarS();
+        habilitarInsertarAntesS();
+    }//GEN-LAST:event_txtNombreKeyReleased
+
+    private void txtApellidoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyReleased
+        habilitarInsertarS();
+        habilitarInsertarAntesS();
+    }//GEN-LAST:event_txtApellidoKeyReleased
+
+    private void txtEdadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyReleased
+        habilitarInsertarS();
+        habilitarInsertarAntesS();
+    }//GEN-LAST:event_txtEdadKeyReleased
+
+    private void txtCodigoBKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBKeyReleased
+        habilitarInsertarAntesS();
+    }//GEN-LAST:event_txtCodigoBKeyReleased
+
+    private void btnInsertarDespuesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarDespuesActionPerformed
+        try {          
+            //obtener los datos del alumno a ingresar
+            String codigo = txtCodigo.getText();
+            String nombre = txtNombre.getText();
+            String apellido = txtApellido.getText();
+            int edad = Integer.parseInt(txtEdad.getText());
+            String datoB = txtCodigoB.getText();
+            //verificar todos los datos
+            verificarCodigoEdad(codigo, edad);
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //crear al objeto
+            Estudiante estudiante = new Estudiante(codigo, nombre, apellido, edad);
+            //agregamos a la lista
+            System.out.println("-----------------------Insertar Despues Elemento Buscado---------------------------------");
+            estudiantes.insertarDespuesElementoBuscado(estudianteB, estudiante);
+            System.out.println(estudiantes);
+            //imprimir tabla
+            imprimirjTable();
+            //limpiar el formulario
+            limpiarCampos();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnInsertarDespuesActionPerformed
+
+    private void txtCodigoBInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_txtCodigoBInputMethodTextChanged
+        
+    }//GEN-LAST:event_txtCodigoBInputMethodTextChanged
+
+    private void btnEliminarAntesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAntesActionPerformed
+        try {          
+            String datoB = txtCodigoB.getText();
+            //verificar datoB
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //Eliminamos
+            System.out.println("-----------------------Eliminar Antes Elemento Buscado---------------------------------");
+            estudiantes.eliminarAntesElementoBuscado(estudianteB);
+            System.out.println(estudiantes);
+            //imprimir tabla
+            imprimirjTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarAntesActionPerformed
+
+    private void btnEliminarDespuesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDespuesActionPerformed
+        try {          
+            String datoB = txtCodigoB.getText();
+            //verificar datoB
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //Eliminamos
+            System.out.println("-----------------------Eliminar Despues Elemento Buscado---------------------------------");
+            estudiantes.eliminarDespuesElementoBuscado(estudianteB);
+            System.out.println(estudiantes);
+            //imprimir tabla
+            imprimirjTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarDespuesActionPerformed
+
+    private void btnEliminarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarBActionPerformed
+        try {          
+            String datoB = txtCodigoB.getText();
+            //verificar datoB
+            verificarCodigoB(datoB);
+            //obtener el datoBuscado
+            Estudiante estudianteB = new Estudiante(datoB, "", "", 0);
+            //Eliminamos
+            System.out.println("-----------------------Eliminar Elemento Buscado---------------------------------");
+            estudiantes.eliminarElementoBuscado(estudianteB);
+            System.out.println(estudiantes);
+            //imprimir tabla
+            imprimirjTable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarBActionPerformed
     
     
     private void limpiarCampos(){
@@ -1254,6 +1347,10 @@ public class Main extends javax.swing.JFrame {
         txtNombre.setText("");
         txtApellido.setText("");
         txtEdad.setText("");
+        btnSInsertarInicio.setEnabled(false);
+        btnInsertarFinal.setEnabled(false);
+        btninsertarAntes.setEnabled(false);
+        btnInsertarDespues.setEnabled(false);
     }
     private void limpiarCamposD(){
         txtCodigoD.setText("");
@@ -1268,19 +1365,9 @@ public class Main extends javax.swing.JFrame {
         txtEdadC.setText("");
     }
     
-    
-    private String getCodigoSeleccionado(){
-        int filaSelect = tableListaSimple.getSelectedRow();
-        int columna = 0;
-        String codigo = (String) tableListaSimple.getValueAt(filaSelect, columna);
-        return codigo;
-    }
     private void imprimirjTable(){
         int filas = estudiantes.getTamanio();
-        
         Object [][] data = new Object[filas][4];
-
-
         for (int i = 0; i < filas ; i++) {
             Estudiante e1 = estudiantes.getDatoIndex(i);
             data[i][0]= e1.getCodigo();
@@ -1288,22 +1375,17 @@ public class Main extends javax.swing.JFrame {
             data[i][2]= e1.getApellido();
             data[i][3]= e1.getEdad();
         }
-
         tableListaSimple.setModel(new javax.swing.table.DefaultTableModel(
             data,
             new String [] {
                 "Código", "Nombre", "Apellido", "Edad"
             }
         ));
-            
-        
     }
     
     private void imprimirjTableD(){
         int filas = estudiantesD.getTamanio();
-        
         Object [][] data = new Object[filas][4];
-
         for (int i = 0; i < filas ; i++) {
             Estudiante e1 = estudiantesD.getDatoIndex(i);
             data[i][0]= e1.getCodigo();
@@ -1341,57 +1423,44 @@ public class Main extends javax.swing.JFrame {
                 "Código", "Nombre", "Apellido", "Edad"
             }
         ));
-            
         
     }
-    
-    private boolean verificaFaltaDatos(String codigo, String nombre, String apellido, int edad){
-        boolean result = codigo.equals("") || codigo.length() != 8|| nombre.equals("") || apellido.equals("") || edad < 1;
-        return result;
-    }
-    
-    private boolean verificarCodigoUnico(String codigo){
-        boolean result = true;
-        int tamanio = estudiantes.getTamanio();
-        for (int i = 0; i < tamanio ; i++) {
-            String codigoProbar = estudiantes.getDatoIndex(i).getCodigo();
-            if (codigoProbar.equals(codigo)) {
-                result = false;
-            }
-            
+    // Verificaciones
+    private void verificarCodigoEdad(String codigo, int edad) throws Exception{
+        if (codigo.length() != 8) {
+            throw new Exception("El codigo debe ser de 8 dígitos");
+        }else if(edad < 10){
+            throw new Exception("La edad debe ser mayor a 10 años");
         }
-        
-        return result;
     }
-    
-    
-    private boolean verificarCodigoUnicoD(String codigo){
-        boolean result = true;
-        int tamanio = estudiantesD.getTamanio();
-        for (int i = 0; i < tamanio ; i++) {
-            String codigoProbar = estudiantesD.getDatoIndex(i).getCodigo();
-            if (codigoProbar.equals(codigo)) {
-                result = false;
-            }
-            
+    private void verificarCodigoB(String codigoB) throws Exception{
+        if (codigoB.length() != 8) {
+            throw new Exception("El codigo Buscado debe ser de 8 dígitos");
         }
-        
-        return result;
+    }
+    //hablitar botones
+    // lista simple
+    private void habilitarInsertarS(){
+        if (!txtCodigo.getText().isEmpty() && !txtNombre.getText().isEmpty() 
+                && !txtApellido.getText().isEmpty() && !txtEdad.getText().isEmpty()) {
+            btnSInsertarInicio.setEnabled(true);
+            btnInsertarFinal.setEnabled(true);
+        }else{
+            btnSInsertarInicio.setEnabled(false);
+            btnInsertarFinal.setEnabled(false);
+        }
+    }
+    private void habilitarInsertarAntesS(){
+        if (!txtCodigo.getText().isEmpty() && !txtNombre.getText().isEmpty() 
+                && !txtApellido.getText().isEmpty() && !txtEdad.getText().isEmpty() && !txtCodigoB.getText().isEmpty()) {
+            btninsertarAntes.setEnabled(true);
+            btnInsertarDespues.setEnabled(true);
+        }else{
+            btninsertarAntes.setEnabled(false);
+            btnInsertarDespues.setEnabled(false);
+        }
     }
     
-    private boolean verificarCodigoUnicoC(String codigo){
-        boolean result = true;
-        int tamanio = estudiantesC.getTamanio();
-        for (int i = 0; i < tamanio ; i++) {
-            String codigoProbar = estudiantesC.getDatoIndex(i).getCodigo();
-            if (codigoProbar.equals(codigo)) {
-                result = false;
-            }
-            
-        }
-        
-        return result;
-    }
     /**
      * @param args the command line arguments
      */
@@ -1421,6 +1490,7 @@ public class Main extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Main().setVisible(true);
             }
@@ -1439,6 +1509,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel botones1;
     private javax.swing.JPanel botones2;
     private javax.swing.JButton btnBuscarLSimple;
+    private javax.swing.JButton btnEliminarAntes;
+    private javax.swing.JButton btnEliminarB;
+    private javax.swing.JButton btnEliminarDespues;
     private javax.swing.JButton btnEliminarFinal;
     private javax.swing.JButton btnEliminarFinalC;
     private javax.swing.JButton btnEliminarFinalD;
@@ -1446,6 +1519,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton btnEliminarPrimero;
     private javax.swing.JButton btnEliminarPrimeroD;
     private javax.swing.JButton btnInsertFinalD;
+    private javax.swing.JButton btnInsertarDespues;
     private javax.swing.JButton btnInsertarFinal;
     private javax.swing.JButton btnInsertarFinalC;
     private javax.swing.JButton btnInsertarInicioD;
@@ -1459,7 +1533,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel inputs;
     private javax.swing.JPanel inputs1;
     private javax.swing.JPanel inputs2;
-    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
@@ -1472,9 +1545,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton jButton28;
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

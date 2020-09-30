@@ -8,7 +8,7 @@ public class Main {
         Estudiante e4 = new Estudiante("4","e4", "apell", 20);
         Estudiante e5 = new Estudiante("5","e5", "apell", 28);
         Estudiante e6 = new Estudiante("5","e5", "apell", 28);
-        System.out.println("hola" == "hola");
+        
 
         /*
                                     Lista Simple
@@ -19,15 +19,19 @@ public class Main {
         System.out.println("=> tamaño: " + estudiantes.getTamanio());
 
         System.out.println("--------------------------Insertar por el primero-----------------------------------------");
-        estudiantes.insertarPrimero(e1);
-        System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]-> null
-        estudiantes.insertarPrimero(e2);
-        System.out.println(estudiantes); //primero->[{'e2', 'apell', 13}]->[{'e1', 'apell', 12}]-> null
-        estudiantes.insertarPrimero(e3);
-        System.out.println(estudiantes); //primero->[{'e3', 'apell', 11}]->[{'e2', 'apell', 13}]->[{'e1', 'apell', 12}]-> null
-        estudiantes.insertarPrimero(e4);
-        System.out.println(estudiantes); //primero->[{'e4', 'apell', 20}]->[{'e3', 'apell', 11}]->[{'e2', 'apell', 13}]->[{'e1', 'apell', 12}]-> null
+        try {
+            estudiantes.insertarPrimero(e1);
+            System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]-> null
+            estudiantes.insertarPrimero(e2);
+            System.out.println(estudiantes); //primero->[{'e2', 'apell', 13}]->[{'e1', 'apell', 12}]-> null
+            estudiantes.insertarPrimero(e3);
+            System.out.println(estudiantes); //primero->[{'e3', 'apell', 11}]->[{'e2', 'apell', 13}]->[{'e1', 'apell', 12}]-> null
+            estudiantes.insertarPrimero(e4);
+            System.out.println(estudiantes); //primero->[{'e4', 'apell', 20}]->[{'e3', 'apell', 11}]->[{'e2', 'apell', 13}]->[{'e1', 'apell', 12}]-> null
 
+        } catch (Exception e) {
+        }
+        
         System.out.println("=> tamaño: " + estudiantes.getTamanio());
 
         System.out.println("-----------------------------Eliminar por el primero---------------------------------------");
@@ -49,15 +53,18 @@ public class Main {
         System.out.println("=> tamaño: " + estudiantes.getTamanio());
 
         System.out.println("-----------------------Insertar por el final---------------------------------");
-        estudiantes.insertarFinal(e1);
-        System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]-> null
-        estudiantes.insertarFinal(e2);
-        System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]->[{'e2', 'apell', 13}]-> null
-        estudiantes.insertarFinal(e3);
-        System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]->[{'e2', 'apell', 13}]->[{'e3', 'apell', 11}]-> null
-        estudiantes.insertarFinal(e4);
-        System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]->[{'e2', 'apell', 13}]->[{'e3', 'apell', 11}]->[{'e4', 'apell', 20}]-> null
+        try {
+            estudiantes.insertarFinal(e1);
+            System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]-> null
+            estudiantes.insertarFinal(e2);
+            System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]->[{'e2', 'apell', 13}]-> null
+            estudiantes.insertarFinal(e3);
+            System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]->[{'e2', 'apell', 13}]->[{'e3', 'apell', 11}]-> null
+            estudiantes.insertarFinal(e4);
+            System.out.println(estudiantes); //primero->[{'e1', 'apell', 12}]->[{'e2', 'apell', 13}]->[{'e3', 'apell', 11}]->[{'e4', 'apell', 20}]-> null
 
+        } catch (Exception e) {
+        }
         System.out.println("=> tamaño: " + estudiantes.getTamanio());
 
         System.out.println("-----------------------Eliminar por el final---------------------------------");

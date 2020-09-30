@@ -19,7 +19,8 @@ public class ListaSimple<Tipo> {
     }
 
     /*------------------------------------- insertar por el primero------------------------------------------------- */
-    public ListaSimple insertarPrimero(Tipo dato){
+    public ListaSimple insertarPrimero(Tipo dato) throws Exception{
+        datoIUnico(dato);
         NodoSimple nuevo = new NodoSimple(dato);
         if (!esVacio()){ /* Si la lista no esta vacia */
             nuevo.setSiguiente(primero); /*modificador*/
@@ -43,7 +44,8 @@ public class ListaSimple<Tipo> {
         return this;
     }
     /* -----------------------------------Insertar final-------------------------------------------------------------*/
-    public ListaSimple insertarFinal(Tipo dato){
+    public ListaSimple insertarFinal(Tipo dato) throws Exception{
+        datoIUnico(dato);
         NodoSimple nuevo = new NodoSimple(dato);
         if (!esVacio()){
             NodoSimple auxiliar= primero;
@@ -85,7 +87,7 @@ public class ListaSimple<Tipo> {
         aux = recorrerUnNodoAnteriorElementoB(aux, datoB);
         //si solo tiene un nodo
         if (aux.getSiguiente() != null){
-            if (aux.getDato() == datoB){
+            if (aux.getDato().equals(datoB)){
                 //si es el primer nodo
                 primero = aux.getSiguiente();
             } else if (aux.getSiguiente().getSiguiente() != null){
@@ -94,9 +96,6 @@ public class ListaSimple<Tipo> {
                 aux = aux.getSiguiente();
                 auxAnterior.setSiguiente(aux.getSiguiente());
             }
-            //si es el primer nodo
-            //si el nodo buscado es el ultimo
-            // si es un nodo intermedio
             aux.setSiguiente(null);
         }else {
             primero = null;
@@ -108,10 +107,12 @@ public class ListaSimple<Tipo> {
     /* -----------------------------------Insertar antes elemento buscado---------------------------------------------*/
     public ListaSimple insertarAntesElementoBuscado(Tipo datoBuscado, Tipo datoInsertar) throws Exception {
         exeptionListaVacia();
+        datoIUnico(datoInsertar);
         NodoSimple nuevo = new NodoSimple(datoInsertar);
         NodoSimple aux = primero;
         aux = recorrerUnNodoAnteriorElementoB(aux, datoBuscado);
-        if (aux.getSiguiente() != null && aux.getDato() != datoBuscado){
+        System.out.println("aqui despues");
+        if (aux.getSiguiente() != null && !aux.getDato().equals(datoBuscado)){
             //la lista tiene de 2 a más elementos y no insertamos antes del primero
             nuevo.setSiguiente(aux.getSiguiente());
             aux.setSiguiente(nuevo);
@@ -128,8 +129,8 @@ public class ListaSimple<Tipo> {
         NodoSimple aux = primero;
         aux = recorrerDosNodoAnteriorElementoB(aux, datoB);
         //si solo tiene un nodo o el nodo buscado es el primero
-        if (aux.getDato() != datoB){
-            if (aux.getSiguiente().getDato() != datoB){
+        if (!aux.getDato().equals(datoB)){
+            if (!aux.getSiguiente().getDato().equals(datoB)){
                 NodoSimple auxAnterior = aux;
                 aux = aux.getSiguiente();
                 auxAnterior.setSiguiente(aux.getSiguiente());
@@ -148,23 +149,10 @@ public class ListaSimple<Tipo> {
     /* ---------------------------------Insertar despues elemento buscado---------------------------------------------*/
     public ListaSimple insertarDespuesElementoBuscado(Tipo datoB, Tipo datoI) throws Exception {
         exeptionListaVacia();
+        datoIUnico(datoI);
         NodoSimple nuevo = new NodoSimple(datoI);
-        /*si el primero es el dato buscado */
-//        if (primero.getDato() == datoB ){
-//            if (primero.getSiguiente() != null){
-//                nuevo.setSiguiente(primero.getSiguiente());
-//            }
-//            primero.setSiguiente(nuevo);
-//        }else {
-//            NodoSimple aux = primero;
-//            aux = recorrerNodoAnteriorElementoB(aux, datoB);
-//            //posicionarnos en el nodo buscado
-//            aux = aux.getSiguiente();
-//            nuevo.setSiguiente(aux.getSiguiente());
-//            aux.setSiguiente(nuevo);
-//        }
         NodoSimple aux = primero;
-        if (primero.getDato() != datoB ) {
+        if (!primero.getDato().equals(datoB)) {
             aux = recorrerUnNodoAnteriorElementoB(aux, datoB);
             //posicionarnos en el nodo buscado
             aux = aux.getSiguiente();
@@ -215,14 +203,6 @@ public class ListaSimple<Tipo> {
         salida = salida + "[" + actual.getDato()+ "]-> null";
         return salida;
     }
-    /*    public String toString() {
-        String salida = "";
-        NodoSimple actual;
-        for (actual = primero; actual !=null; actual=actual.getSiguiente()){
-            salida = salida + actual.getDato();
-        }
-        return salida;
-    }*/
     /*------------------------------------utils----------------------------------------------------------------*/
     public void exeptionListaVacia() throws Exception {
         if (esVacio()){
@@ -245,10 +225,10 @@ public class ListaSimple<Tipo> {
 
     /*------------------------------------Recorridos ElementoBuscado--------------------------------------------------*/
     private NodoSimple recorrerElementoBuscado(NodoSimple aux, Tipo datoB) throws Exception {
-        while (aux.getDato() != datoB && aux.getSiguiente() != null){
+        while (!aux.getDato().equals(datoB) && aux.getSiguiente() != null){
             aux = aux.getSiguiente();
         }
-        if (aux.getDato() != datoB){
+        if (!aux.getDato().equals(datoB) ){
             throw new Exception("No se encontro el elemento Buscado");
         }
         return aux;
@@ -256,9 +236,9 @@ public class ListaSimple<Tipo> {
     public NodoSimple recorrerUnNodoAnteriorElementoB(NodoSimple aux, Tipo datoBuscado) throws Exception {
         //precoindicion la lista no debe estar vacia
         //comprobar que el nodoB no es el primero
-        if (aux.getDato() != datoBuscado){
+        if (!aux.getDato().equals(datoBuscado)){
             /*mientras haya mas de un nodo y no lleguemos al nodo buscado recorrido y se posiciona a un nodo anterior del buscado*/
-            while (aux.getSiguiente()!= null && aux.getSiguiente().getDato() != datoBuscado){
+            while (aux.getSiguiente()!= null && !aux.getSiguiente().getDato().equals(datoBuscado)){
                 aux = aux.getSiguiente();
             }
             /*si el nodo en el que estamos apunta a null significa q no existe el elemento(si solo hay un nodo o si recorrimos hasta el final)*/
@@ -272,10 +252,10 @@ public class ListaSimple<Tipo> {
     public NodoSimple recorrerDosNodoAnteriorElementoB(NodoSimple aux, Tipo datoBuscado) throws Exception {
         //precoindicion la lista no debe estar vacia
         //Retornamos el primer nodo si el dato buscado se enuentra en el primero o segundo nodo
-        if (aux.getDato() != datoBuscado && aux.getSiguiente().getDato() != datoBuscado){
+        if (!aux.getDato().equals(datoBuscado) && !aux.getSiguiente().getDato().equals(datoBuscado) ){
             //System.out.println("no es el primero ni el segundo " + aux.getDato() + " => " + datoBuscado);
             /*mientras haya mas de 3 nodos*/
-            while (aux.getSiguiente().getSiguiente()!= null && aux.getSiguiente().getSiguiente().getDato() != datoBuscado){
+            while (aux.getSiguiente().getSiguiente()!= null && !aux.getSiguiente().getSiguiente().getDato().equals(datoBuscado)){
                 aux = aux.getSiguiente();
             }
             if (aux.getSiguiente().getSiguiente() == null){
@@ -296,5 +276,28 @@ public class ListaSimple<Tipo> {
         }
         
         return (Tipo) actual.getDato();
+    }
+    public Tipo getElementoBuscado(Tipo datoB) throws Exception {
+        exeptionListaVacia();
+        NodoSimple aux = primero;
+        while (!aux.getDato().equals(datoB) && aux.getSiguiente() != null){
+            aux = aux.getSiguiente();
+        }
+        if (!aux.getDato().equals(datoB) ){
+            throw new Exception("No se encontro el elemento Buscado");
+        }
+        return (Tipo) aux.getDato();
+    }
+    /*--------------------comprobar que el datoI no exista--------------------------------------------------------------*/
+    private void datoIUnico(Tipo datoI) throws Exception{
+        if(!esVacio()){
+            NodoSimple actual = primero;
+            while (!actual.getDato().equals(datoI) && actual.getSiguiente() != null) {
+                actual = actual.getSiguiente();
+            }
+            if (actual.getDato().equals(datoI)) {
+                throw new Exception("El alumno ya existe no se puede insertar");
+            }
+        }   
     }
 }
