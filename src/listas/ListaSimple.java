@@ -105,7 +105,7 @@ public class ListaSimple<Tipo> {
     }
 
     /* -----------------------------------Insertar antes elemento buscado---------------------------------------------*/
-    public ListaSimple insertarAntesElementoBuscado(Tipo datoBuscado, Tipo datoInsertar) throws Exception {
+    public ListaSimple insertarAntesElementoBuscado(Tipo datoInsertar, Tipo datoBuscado) throws Exception {
         exeptionListaVacia();
         datoIUnico(datoInsertar);
         NodoSimple nuevo = new NodoSimple(datoInsertar);
@@ -147,7 +147,7 @@ public class ListaSimple<Tipo> {
         return this;
     }
     /* ---------------------------------Insertar despues elemento buscado---------------------------------------------*/
-    public ListaSimple insertarDespuesElementoBuscado(Tipo datoB, Tipo datoI) throws Exception {
+    public ListaSimple insertarDespuesElementoBuscado(Tipo datoI, Tipo datoB) throws Exception {
         exeptionListaVacia();
         datoIUnico(datoI);
         NodoSimple nuevo = new NodoSimple(datoI);
