@@ -60,7 +60,7 @@ public class Main extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         botones = new javax.swing.JPanel();
-        btnSInsertarInicio = new javax.swing.JButton();
+        btnInsertarPrimero = new javax.swing.JButton();
         btnInsertarFinal = new javax.swing.JButton();
         btnEliminarPrimero = new javax.swing.JButton();
         btnEliminarFinal = new javax.swing.JButton();
@@ -75,15 +75,15 @@ public class Main extends javax.swing.JFrame {
         txtEdad = new javax.swing.JTextField();
         buscado = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        btnEliminarB = new javax.swing.JButton();
+        btnEliminarBuscado = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         txtCodigoB = new javax.swing.JTextField();
-        btnBuscarLSimple = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        btninsertarAntes = new javax.swing.JButton();
+        btnInsertarAntes = new javax.swing.JButton();
         btnInsertarDespues = new javax.swing.JButton();
         btnEliminarAntes = new javax.swing.JButton();
         btnEliminarDespues = new javax.swing.JButton();
@@ -92,8 +92,8 @@ public class Main extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         botones1 = new javax.swing.JPanel();
-        btnInsertarInicioD = new javax.swing.JButton();
-        btnInsertFinalD = new javax.swing.JButton();
+        btnInsertarPrimeroD = new javax.swing.JButton();
+        btnInsertarFinalD = new javax.swing.JButton();
         btnEliminarPrimeroD = new javax.swing.JButton();
         btnEliminarFinalD = new javax.swing.JButton();
         inputs1 = new javax.swing.JPanel();
@@ -107,17 +107,17 @@ public class Main extends javax.swing.JFrame {
         txtEdadD = new javax.swing.JTextField();
         buscado1 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jButton15 = new javax.swing.JButton();
+        btnEliminarBuscadoD = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         txtCodigoBD = new javax.swing.JTextField();
-        jButton16 = new javax.swing.JButton();
-        jPanel11 = new javax.swing.JPanel();
-        jButton17 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
-        jButton19 = new javax.swing.JButton();
+        btnBuscarDoble = new javax.swing.JButton();
+        btnEliminarDespuesD = new javax.swing.JPanel();
+        btnInsertarAntesD = new javax.swing.JButton();
+        btnInsertarDespuesD = new javax.swing.JButton();
+        btnEliminarAntesD = new javax.swing.JButton();
         jButton20 = new javax.swing.JButton();
         Lista1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -228,14 +228,14 @@ public class Main extends javax.swing.JFrame {
 
         botones.setLayout(new java.awt.GridLayout(2, 2, 5, 5));
 
-        btnSInsertarInicio.setText("Insertar Inicio");
-        btnSInsertarInicio.setEnabled(false);
-        btnSInsertarInicio.addActionListener(new java.awt.event.ActionListener() {
+        btnInsertarPrimero.setText("Insertar Inicio");
+        btnInsertarPrimero.setEnabled(false);
+        btnInsertarPrimero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSInsertarInicioActionPerformed(evt);
+                btnInsertarPrimeroActionPerformed(evt);
             }
         });
-        botones.add(btnSInsertarInicio);
+        botones.add(btnInsertarPrimero);
 
         btnInsertarFinal.setText("Insertar Final");
         btnInsertarFinal.setEnabled(false);
@@ -294,6 +294,9 @@ public class Main extends javax.swing.JFrame {
             }
         });
         txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombreKeyReleased(evt);
             }
@@ -304,6 +307,9 @@ public class Main extends javax.swing.JFrame {
         inputs.add(jLabel8);
 
         txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyTyped(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtApellidoKeyReleased(evt);
             }
@@ -333,13 +339,13 @@ public class Main extends javax.swing.JFrame {
         jLabel10.setText("Elemento Buscado");
         buscado.add(jLabel10, java.awt.BorderLayout.PAGE_START);
 
-        btnEliminarB.setText("Eliminar Elemento Buscado");
-        btnEliminarB.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarBuscado.setText("Eliminar Elemento Buscado");
+        btnEliminarBuscado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarBActionPerformed(evt);
+                btnEliminarBuscadoActionPerformed(evt);
             }
         });
-        buscado.add(btnEliminarB, java.awt.BorderLayout.PAGE_END);
+        buscado.add(btnEliminarBuscado, java.awt.BorderLayout.PAGE_END);
 
         jPanel2.setLayout(new java.awt.GridLayout(2, 0, 0, 5));
 
@@ -369,26 +375,26 @@ public class Main extends javax.swing.JFrame {
 
         jPanel3.add(jPanel7);
 
-        btnBuscarLSimple.setText("Buscar");
-        btnBuscarLSimple.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarLSimpleActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
-        jPanel3.add(btnBuscarLSimple);
+        jPanel3.add(btnBuscar);
 
         jPanel2.add(jPanel3);
 
         jPanel4.setLayout(new java.awt.GridLayout(2, 2, 5, 5));
 
-        btninsertarAntes.setText("Insertar Antes");
-        btninsertarAntes.setEnabled(false);
-        btninsertarAntes.addActionListener(new java.awt.event.ActionListener() {
+        btnInsertarAntes.setText("Insertar Antes");
+        btnInsertarAntes.setEnabled(false);
+        btnInsertarAntes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btninsertarAntesActionPerformed(evt);
+                btnInsertarAntesActionPerformed(evt);
             }
         });
-        jPanel4.add(btninsertarAntes);
+        jPanel4.add(btnInsertarAntes);
 
         btnInsertarDespues.setText("Insertar Despues");
         btnInsertarDespues.setEnabled(false);
@@ -437,21 +443,23 @@ public class Main extends javax.swing.JFrame {
 
         botones1.setLayout(new java.awt.GridLayout(2, 2, 5, 5));
 
-        btnInsertarInicioD.setText("Insertar Inicio");
-        btnInsertarInicioD.addActionListener(new java.awt.event.ActionListener() {
+        btnInsertarPrimeroD.setText("Insertar Inicio");
+        btnInsertarPrimeroD.setEnabled(false);
+        btnInsertarPrimeroD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInsertarInicioDActionPerformed(evt);
+                btnInsertarPrimeroDActionPerformed(evt);
             }
         });
-        botones1.add(btnInsertarInicioD);
+        botones1.add(btnInsertarPrimeroD);
 
-        btnInsertFinalD.setText("Insertar Final");
-        btnInsertFinalD.addActionListener(new java.awt.event.ActionListener() {
+        btnInsertarFinalD.setText("Insertar Final");
+        btnInsertarFinalD.setEnabled(false);
+        btnInsertarFinalD.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInsertFinalDActionPerformed(evt);
+                btnInsertarFinalDActionPerformed(evt);
             }
         });
-        botones1.add(btnInsertFinalD);
+        botones1.add(btnInsertarFinalD);
 
         btnEliminarPrimeroD.setText("Eliminar Inicio");
         btnEliminarPrimeroD.addActionListener(new java.awt.event.ActionListener() {
@@ -481,6 +489,9 @@ public class Main extends javax.swing.JFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoDKeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodigoDKeyReleased(evt);
+            }
         });
         inputs1.add(txtCodigoD);
 
@@ -492,10 +503,27 @@ public class Main extends javax.swing.JFrame {
                 txtNombreDActionPerformed(evt);
             }
         });
+        txtNombreD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreDKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombreDKeyReleased(evt);
+            }
+        });
         inputs1.add(txtNombreD);
 
         jLabel15.setText("Apellido");
         inputs1.add(jLabel15);
+
+        txtApellidoD.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoDKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApellidoDKeyReleased(evt);
+            }
+        });
         inputs1.add(txtApellidoD);
 
         jLabel16.setText("Edad");
@@ -504,6 +532,9 @@ public class Main extends javax.swing.JFrame {
         txtEdadD.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtEdadDKeyTyped(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEdadDKeyReleased(evt);
             }
         });
         inputs1.add(txtEdadD);
@@ -518,8 +549,8 @@ public class Main extends javax.swing.JFrame {
         jLabel17.setText("Elemento Buscado");
         buscado1.add(jLabel17, java.awt.BorderLayout.PAGE_START);
 
-        jButton15.setText("Eliminar Elemento Buscado");
-        buscado1.add(jButton15, java.awt.BorderLayout.PAGE_END);
+        btnEliminarBuscadoD.setText("Eliminar Elemento Buscado");
+        buscado1.add(btnEliminarBuscadoD, java.awt.BorderLayout.PAGE_END);
 
         jPanel5.setLayout(new java.awt.GridLayout(2, 0, 0, 5));
 
@@ -534,31 +565,36 @@ public class Main extends javax.swing.JFrame {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCodigoBDKeyTyped(evt);
             }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCodigoBDKeyReleased(evt);
+            }
         });
         jPanel10.add(txtCodigoBD);
 
         jPanel9.add(jPanel10);
 
-        jButton16.setText("Buscar");
-        jPanel9.add(jButton16);
+        btnBuscarDoble.setText("Buscar");
+        jPanel9.add(btnBuscarDoble);
 
         jPanel5.add(jPanel9);
 
-        jPanel11.setLayout(new java.awt.GridLayout(2, 2, 5, 5));
+        btnEliminarDespuesD.setLayout(new java.awt.GridLayout(2, 2, 5, 5));
 
-        jButton17.setText("Insertar Antes");
-        jPanel11.add(jButton17);
+        btnInsertarAntesD.setText("Insertar Antes");
+        btnInsertarAntesD.setEnabled(false);
+        btnEliminarDespuesD.add(btnInsertarAntesD);
 
-        jButton18.setText("Insertar Despues");
-        jPanel11.add(jButton18);
+        btnInsertarDespuesD.setText("Insertar Despues");
+        btnInsertarDespuesD.setEnabled(false);
+        btnEliminarDespuesD.add(btnInsertarDespuesD);
 
-        jButton19.setText("Eliminar Antes");
-        jPanel11.add(jButton19);
+        btnEliminarAntesD.setText("Eliminar Antes");
+        btnEliminarDespuesD.add(btnEliminarAntesD);
 
         jButton20.setText("Eliminar Despues");
-        jPanel11.add(jButton20);
+        btnEliminarDespuesD.add(jButton20);
 
-        jPanel5.add(jPanel11);
+        jPanel5.add(btnEliminarDespuesD);
 
         buscado1.add(jPanel5, java.awt.BorderLayout.CENTER);
 
@@ -679,10 +715,21 @@ public class Main extends javax.swing.JFrame {
                 txtNombreCActionPerformed(evt);
             }
         });
+        txtNombreC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreCKeyTyped(evt);
+            }
+        });
         inputs2.add(txtNombreC);
 
         jLabel22.setText("Apellido");
         inputs2.add(jLabel22);
+
+        txtApellidoC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoCKeyTyped(evt);
+            }
+        });
         inputs2.add(txtApellidoC);
 
         jLabel23.setText("Edad");
@@ -784,7 +831,7 @@ public class Main extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreCActionPerformed
 
-    private void btnSInsertarInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSInsertarInicioActionPerformed
+    private void btnInsertarPrimeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarPrimeroActionPerformed
         try {
             //obtener los datos
             String codigo = txtCodigo.getText();
@@ -808,7 +855,7 @@ public class Main extends javax.swing.JFrame {
             System.out.println(e);
         }
         
-    }//GEN-LAST:event_btnSInsertarInicioActionPerformed
+    }//GEN-LAST:event_btnInsertarPrimeroActionPerformed
     
     
     private void txtCodigoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyTyped
@@ -997,7 +1044,7 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarFinalActionPerformed
 
-    private void btnBuscarLSimpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarLSimpleActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         
         try {
             // obtener el codigo ingresado
@@ -1023,9 +1070,9 @@ public class Main extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
         }
         
-    }//GEN-LAST:event_btnBuscarLSimpleActionPerformed
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btninsertarAntesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertarAntesActionPerformed
+    private void btnInsertarAntesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarAntesActionPerformed
         // TODO add your handling code here:
         try {          
             //obtener los datos del alumno a ingresar
@@ -1056,7 +1103,7 @@ public class Main extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_btninsertarAntesActionPerformed
+    }//GEN-LAST:event_btnInsertarAntesActionPerformed
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
@@ -1088,7 +1135,7 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnInsertarPrimeroCActionPerformed
 
-    private void btnInsertarInicioDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarInicioDActionPerformed
+    private void btnInsertarPrimeroDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarPrimeroDActionPerformed
         try {
             //obtener los datos
             String codigo = txtCodigoD.getText();
@@ -1113,9 +1160,9 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnInsertarInicioDActionPerformed
+    }//GEN-LAST:event_btnInsertarPrimeroDActionPerformed
 
-    private void btnInsertFinalDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertFinalDActionPerformed
+    private void btnInsertarFinalDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarFinalDActionPerformed
         try {
             //obtener los datos
             String codigo = txtCodigoD.getText();
@@ -1141,7 +1188,7 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Ingrese los datos correctos", "Error", ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnInsertFinalDActionPerformed
+    }//GEN-LAST:event_btnInsertarFinalDActionPerformed
 
     private void btnEliminarPrimeroDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPrimeroDActionPerformed
         try {
@@ -1323,7 +1370,7 @@ public class Main extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarDespuesActionPerformed
 
-    private void btnEliminarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarBActionPerformed
+    private void btnEliminarBuscadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarBuscadoActionPerformed
         try {          
             String datoB = txtCodigoB.getText();
             //verificar datoB
@@ -1339,7 +1386,91 @@ public class Main extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Error", ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnEliminarBActionPerformed
+    }//GEN-LAST:event_btnEliminarBuscadoActionPerformed
+
+    private void txtCodigoDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoDKeyReleased
+        habilitarInsertarD();
+        habilitarInsertarAntesD();
+    }//GEN-LAST:event_txtCodigoDKeyReleased
+
+    private void txtNombreDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreDKeyReleased
+        habilitarInsertarD();
+        habilitarInsertarAntesD();
+    }//GEN-LAST:event_txtNombreDKeyReleased
+
+    private void txtApellidoDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoDKeyReleased
+        habilitarInsertarD();
+        habilitarInsertarAntesD();
+    }//GEN-LAST:event_txtApellidoDKeyReleased
+
+    private void txtEdadDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadDKeyReleased
+        habilitarInsertarD();
+        habilitarInsertarAntesD();
+    }//GEN-LAST:event_txtEdadDKeyReleased
+
+    private void txtCodigoBDKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoBDKeyReleased
+        habilitarInsertarAntesD();
+    }//GEN-LAST:event_txtCodigoBDKeyReleased
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        // limitar q solo se ingrese letras
+        char caracter = evt.getKeyChar();
+        // Verificar si la tecla pulsada no es un digito
+        if(((caracter >= '0') &&
+           (caracter <= '9'))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        // limitar q solo se ingrese letras
+        char caracter = evt.getKeyChar();
+        // Verificar si la tecla pulsada no es un digito
+        if(((caracter >= '0') &&
+           (caracter <= '9'))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void txtNombreDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreDKeyTyped
+        // limitar q solo se ingrese letras
+        char caracter = evt.getKeyChar();
+        // Verificar si la tecla pulsada no es un digito
+        if(((caracter >= '0') &&
+           (caracter <= '9'))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreDKeyTyped
+
+    private void txtApellidoDKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoDKeyTyped
+        // limitar q solo se ingrese letras
+        char caracter = evt.getKeyChar();
+        // Verificar si la tecla pulsada no es un digito
+        if(((caracter >= '0') &&
+           (caracter <= '9'))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtApellidoDKeyTyped
+
+    private void txtNombreCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCKeyTyped
+        // limitar q solo se ingrese letras
+        char caracter = evt.getKeyChar();
+        // Verificar si la tecla pulsada no es un digito
+        if(((caracter >= '0') &&
+           (caracter <= '9'))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreCKeyTyped
+
+    private void txtApellidoCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoCKeyTyped
+        // limitar q solo se ingrese letras
+        char caracter = evt.getKeyChar();
+        // Verificar si la tecla pulsada no es un digito
+        if(((caracter >= '0') &&
+           (caracter <= '9'))){
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtApellidoCKeyTyped
     
     
     private void limpiarCampos(){
@@ -1347,9 +1478,9 @@ public class Main extends javax.swing.JFrame {
         txtNombre.setText("");
         txtApellido.setText("");
         txtEdad.setText("");
-        btnSInsertarInicio.setEnabled(false);
+        btnInsertarPrimero.setEnabled(false);
         btnInsertarFinal.setEnabled(false);
-        btninsertarAntes.setEnabled(false);
+        btnInsertarAntes.setEnabled(false);
         btnInsertarDespues.setEnabled(false);
     }
     private void limpiarCamposD(){
@@ -1443,21 +1574,42 @@ public class Main extends javax.swing.JFrame {
     private void habilitarInsertarS(){
         if (!txtCodigo.getText().isEmpty() && !txtNombre.getText().isEmpty() 
                 && !txtApellido.getText().isEmpty() && !txtEdad.getText().isEmpty()) {
-            btnSInsertarInicio.setEnabled(true);
+            btnInsertarPrimero.setEnabled(true);
             btnInsertarFinal.setEnabled(true);
         }else{
-            btnSInsertarInicio.setEnabled(false);
+            btnInsertarPrimero.setEnabled(false);
             btnInsertarFinal.setEnabled(false);
         }
     }
     private void habilitarInsertarAntesS(){
         if (!txtCodigo.getText().isEmpty() && !txtNombre.getText().isEmpty() 
                 && !txtApellido.getText().isEmpty() && !txtEdad.getText().isEmpty() && !txtCodigoB.getText().isEmpty()) {
-            btninsertarAntes.setEnabled(true);
+            btnInsertarAntes.setEnabled(true);
             btnInsertarDespues.setEnabled(true);
         }else{
-            btninsertarAntes.setEnabled(false);
+            btnInsertarAntes.setEnabled(false);
             btnInsertarDespues.setEnabled(false);
+        }
+    }
+    
+    private void habilitarInsertarD(){
+        if (!txtCodigoD.getText().isEmpty() && !txtNombreD.getText().isEmpty() 
+                && !txtApellidoD.getText().isEmpty() && !txtEdadD.getText().isEmpty()) {
+            btnInsertarPrimeroD.setEnabled(true);
+            btnInsertarFinalD.setEnabled(true);
+        }else{
+            btnInsertarPrimeroD.setEnabled(false);
+            btnInsertarFinalD.setEnabled(false);
+        }
+    }
+    private void habilitarInsertarAntesD(){
+        if (!txtCodigoD.getText().isEmpty() && !txtNombreD.getText().isEmpty() 
+                && !txtApellidoD.getText().isEmpty() && !txtEdadD.getText().isEmpty() && !txtCodigoBD.getText().isEmpty()) {
+            btnInsertarAntesD.setEnabled(true);
+            btnInsertarDespuesD.setEnabled(true);
+        }else{
+            btnInsertarAntesD.setEnabled(false);
+            btnInsertarDespuesD.setEnabled(false);
         }
     }
     
@@ -1508,24 +1660,30 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel botones;
     private javax.swing.JPanel botones1;
     private javax.swing.JPanel botones2;
-    private javax.swing.JButton btnBuscarLSimple;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscarDoble;
     private javax.swing.JButton btnEliminarAntes;
-    private javax.swing.JButton btnEliminarB;
+    private javax.swing.JButton btnEliminarAntesD;
+    private javax.swing.JButton btnEliminarBuscado;
+    private javax.swing.JButton btnEliminarBuscadoD;
     private javax.swing.JButton btnEliminarDespues;
+    private javax.swing.JPanel btnEliminarDespuesD;
     private javax.swing.JButton btnEliminarFinal;
     private javax.swing.JButton btnEliminarFinalC;
     private javax.swing.JButton btnEliminarFinalD;
     private javax.swing.JButton btnEliminarInicioC;
     private javax.swing.JButton btnEliminarPrimero;
     private javax.swing.JButton btnEliminarPrimeroD;
-    private javax.swing.JButton btnInsertFinalD;
+    private javax.swing.JButton btnInsertarAntes;
+    private javax.swing.JButton btnInsertarAntesD;
     private javax.swing.JButton btnInsertarDespues;
+    private javax.swing.JButton btnInsertarDespuesD;
     private javax.swing.JButton btnInsertarFinal;
     private javax.swing.JButton btnInsertarFinalC;
-    private javax.swing.JButton btnInsertarInicioD;
+    private javax.swing.JButton btnInsertarFinalD;
+    private javax.swing.JButton btnInsertarPrimero;
     private javax.swing.JButton btnInsertarPrimeroC;
-    private javax.swing.JButton btnSInsertarInicio;
-    private javax.swing.JButton btninsertarAntes;
+    private javax.swing.JButton btnInsertarPrimeroD;
     private javax.swing.JPanel buscado;
     private javax.swing.JPanel buscado1;
     private javax.swing.JPanel buscado2;
@@ -1533,11 +1691,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel inputs;
     private javax.swing.JPanel inputs1;
     private javax.swing.JPanel inputs2;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
-    private javax.swing.JButton jButton17;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton20;
     private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton26;
@@ -1568,7 +1721,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;

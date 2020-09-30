@@ -210,13 +210,13 @@
                             <Property name="verticalGap" type="int" value="5"/>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JButton" name="btnSInsertarInicio">
+                            <Component class="javax.swing.JButton" name="btnInsertarPrimero">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Insertar Inicio"/>
                                 <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSInsertarInicioActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertarPrimeroActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="btnInsertarFinal">
@@ -285,6 +285,7 @@
                             <Component class="javax.swing.JTextField" name="txtNombre">
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreActionPerformed"/>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreKeyTyped"/>
                                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreKeyReleased"/>
                               </Events>
                             </Component>
@@ -295,6 +296,7 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="txtApellido">
                               <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellidoKeyTyped"/>
                                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellidoKeyReleased"/>
                               </Events>
                             </Component>
@@ -331,12 +333,12 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JButton" name="btnEliminarB">
+                        <Component class="javax.swing.JButton" name="btnEliminarBuscado">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Eliminar Elemento Buscado"/>
                           </Properties>
                           <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarBActionPerformed"/>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarBuscadoActionPerformed"/>
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
@@ -388,12 +390,12 @@
                                     </Component>
                                   </SubComponents>
                                 </Container>
-                                <Component class="javax.swing.JButton" name="btnBuscarLSimple">
+                                <Component class="javax.swing.JButton" name="btnBuscar">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Buscar"/>
                                   </Properties>
                                   <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarLSimpleActionPerformed"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
                                   </Events>
                                 </Component>
                               </SubComponents>
@@ -407,13 +409,13 @@
                                 <Property name="verticalGap" type="int" value="5"/>
                               </Layout>
                               <SubComponents>
-                                <Component class="javax.swing.JButton" name="btninsertarAntes">
+                                <Component class="javax.swing.JButton" name="btnInsertarAntes">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Insertar Antes"/>
                                     <Property name="enabled" type="boolean" value="false"/>
                                   </Properties>
                                   <Events>
-                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btninsertarAntesActionPerformed"/>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertarAntesActionPerformed"/>
                                   </Events>
                                 </Component>
                                 <Component class="javax.swing.JButton" name="btnInsertarDespues">
@@ -505,20 +507,22 @@
                             <Property name="verticalGap" type="int" value="5"/>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JButton" name="btnInsertarInicioD">
+                            <Component class="javax.swing.JButton" name="btnInsertarPrimeroD">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Insertar Inicio"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertarInicioDActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertarPrimeroDActionPerformed"/>
                               </Events>
                             </Component>
-                            <Component class="javax.swing.JButton" name="btnInsertFinalD">
+                            <Component class="javax.swing.JButton" name="btnInsertarFinalD">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Insertar Final"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertFinalDActionPerformed"/>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertarFinalDActionPerformed"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JButton" name="btnEliminarPrimeroD">
@@ -566,6 +570,7 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoDKeyTyped"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoDKeyReleased"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel14">
@@ -576,6 +581,8 @@
                             <Component class="javax.swing.JTextField" name="txtNombreD">
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreDActionPerformed"/>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreDKeyTyped"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreDKeyReleased"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel15">
@@ -584,6 +591,10 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="txtApellidoD">
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellidoDKeyTyped"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellidoDKeyReleased"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel16">
                               <Properties>
@@ -593,6 +604,7 @@
                             <Component class="javax.swing.JTextField" name="txtEdadD">
                               <Events>
                                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEdadDKeyTyped"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEdadDKeyReleased"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -617,7 +629,7 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton15">
+                        <Component class="javax.swing.JButton" name="btnEliminarBuscadoD">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Eliminar Elemento Buscado"/>
                           </Properties>
@@ -665,18 +677,19 @@
                                     <Component class="javax.swing.JTextField" name="txtCodigoBD">
                                       <Events>
                                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoBDKeyTyped"/>
+                                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoBDKeyReleased"/>
                                       </Events>
                                     </Component>
                                   </SubComponents>
                                 </Container>
-                                <Component class="javax.swing.JButton" name="jButton16">
+                                <Component class="javax.swing.JButton" name="btnBuscarDoble">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Buscar"/>
                                   </Properties>
                                 </Component>
                               </SubComponents>
                             </Container>
-                            <Container class="javax.swing.JPanel" name="jPanel11">
+                            <Container class="javax.swing.JPanel" name="btnEliminarDespuesD">
 
                               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                                 <Property name="columns" type="int" value="2"/>
@@ -685,17 +698,19 @@
                                 <Property name="verticalGap" type="int" value="5"/>
                               </Layout>
                               <SubComponents>
-                                <Component class="javax.swing.JButton" name="jButton17">
+                                <Component class="javax.swing.JButton" name="btnInsertarAntesD">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Insertar Antes"/>
+                                    <Property name="enabled" type="boolean" value="false"/>
                                   </Properties>
                                 </Component>
-                                <Component class="javax.swing.JButton" name="jButton18">
+                                <Component class="javax.swing.JButton" name="btnInsertarDespuesD">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Insertar Despues"/>
+                                    <Property name="enabled" type="boolean" value="false"/>
                                   </Properties>
                                 </Component>
-                                <Component class="javax.swing.JButton" name="jButton19">
+                                <Component class="javax.swing.JButton" name="btnEliminarAntesD">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Eliminar Antes"/>
                                   </Properties>
@@ -922,6 +937,7 @@
                             <Component class="javax.swing.JTextField" name="txtNombreC">
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreCActionPerformed"/>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreCKeyTyped"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel22">
@@ -930,6 +946,9 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="txtApellidoC">
+                              <Events>
+                                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellidoCKeyTyped"/>
+                              </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel23">
                               <Properties>
