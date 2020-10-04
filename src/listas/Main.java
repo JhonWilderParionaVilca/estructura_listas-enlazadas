@@ -1,5 +1,7 @@
 package listas;
 
+import javax.xml.transform.Source;
+
 public class Main {
     public static void main(String[] args) {
         Estudiante e1 = new Estudiante("1","e1", "apell", 12);
@@ -266,19 +268,22 @@ public class Main {
         System.out.println(estudiantesD); //La lista esta vacia
         System.out.println("=> tamaño: " + estudiantesD.getTamanio());
 
-        System.out.println("------------------------------------Insertar por el inicio-------------------------------------------------");
-        estudiantesD.insertarPrimero(e5);
-        System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]-> null*/
-        estudiantesD.insertarPrimero(e4);
-        System.out.println(estudiantesD);/*primero y null <=>[{'e2'}]<=>[{'e1'}]-> null*/
-        estudiantesD.insertarPrimero(e3);
-        System.out.println(estudiantesD);/*primero y null <=>[{'e3'}]<=>[{'e2'}]<=>[{'e1'}]-> null*/
-        estudiantesD.insertarPrimero(e2);
-        System.out.println(estudiantesD);/*primero y null <=>[{'e3'}]<=>[{'e2'}]<=>[{'e1'}]-> null*/
-        estudiantesD.insertarPrimero(e1);
-        System.out.println(estudiantesD);/*primero y null <=>[{'e3'}]<=>[{'e2'}]<=>[{'e1'}]-> null*/
-        System.out.println("=> tamaño: " + estudiantesD.getTamanio());
-        System.out.println(estudiantesD.imprimirReveso());
+        try {
+            System.out.println("------------------------------------Insertar por el inicio-------------------------------------------------");
+            estudiantesD.insertarPrimero(e5);
+            System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]-> null*/
+            estudiantesD.insertarPrimero(e4);
+            System.out.println(estudiantesD);/*primero y null <=>[{'e2'}]<=>[{'e1'}]-> null*/
+            estudiantesD.insertarPrimero(e3);
+            System.out.println(estudiantesD);/*primero y null <=>[{'e3'}]<=>[{'e2'}]<=>[{'e1'}]-> null*/
+            estudiantesD.insertarPrimero(e2);
+            System.out.println(estudiantesD);/*primero y null <=>[{'e3'}]<=>[{'e2'}]<=>[{'e1'}]-> null*/
+            estudiantesD.insertarPrimero(e1);
+            System.out.println(estudiantesD);/*primero y null <=>[{'e3'}]<=>[{'e2'}]<=>[{'e1'}]-> null*/
+            System.out.println("=> tamaño: " + estudiantesD.getTamanio());
+            System.out.println(estudiantesD.imprimirReveso());
+        } catch (Exception e) {
+        }
 
         System.out.println("------------------------------------Eliminar por el inicio-------------------------------------------------");
         try {
@@ -301,18 +306,21 @@ public class Main {
             System.out.println(e);
         }
 
-        System.out.println("------------------------------------Insertar final-------------------------------------------------");
-        estudiantesD.insertarFinal(e1);
-        System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]-> null*/
-        estudiantesD.insertarFinal(e2);
-        System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]<=>[{'e2'}]-> null*/
-        estudiantesD.insertarFinal(e3);
-        System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]<=>[{'e2'}]<=>[{'e3'}]-> null*/
-        estudiantesD.insertarFinal(e4);
-        System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]<=>[{'e2'}]<=>[{'e3'}]<=>[{'e4'}]-> null*/
-        estudiantesD.insertarFinal(e5);
-        System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]<=>[{'e2'}]<=>[{'e3'}]<=>[{'e4'}]<=>[{'e5'}]-> null*/
-        System.out.println("=> tamaño: " + estudiantesD.getTamanio());
+        try {
+            System.out.println("------------------------------------Insertar final-------------------------------------------------");
+            estudiantesD.insertarFinal(e1);
+            System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]-> null*/
+            estudiantesD.insertarFinal(e2);
+            System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]<=>[{'e2'}]-> null*/
+            estudiantesD.insertarFinal(e3);
+            System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]<=>[{'e2'}]<=>[{'e3'}]-> null*/
+            estudiantesD.insertarFinal(e4);
+            System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]<=>[{'e2'}]<=>[{'e3'}]<=>[{'e4'}]-> null*/
+            estudiantesD.insertarFinal(e5);
+            System.out.println(estudiantesD); /*primero y null <=>[{'e1'}]<=>[{'e2'}]<=>[{'e3'}]<=>[{'e4'}]<=>[{'e5'}]-> null*/
+            System.out.println("=> tamaño: " + estudiantesD.getTamanio());
+        } catch (Exception e) {
+        }
 
         System.out.println("------------------------------------Eliminar final-------------------------------------------------");
         try{
@@ -337,12 +345,17 @@ public class Main {
         }
 
         System.out.println("------------------------------Eliminar Elemento Buscado-----------------------------------------------");
-        estudiantesD.insertarFinal(e1);
-        estudiantesD.insertarFinal(e2);
-        estudiantesD.insertarFinal(e3);
-        estudiantesD.insertarFinal(e4);
-        estudiantesD.insertarFinal(e5);
-        System.out.println(estudiantesD);
+        try {
+            estudiantesD.insertarFinal(e1);
+            estudiantesD.insertarFinal(e2);
+            estudiantesD.insertarFinal(e3);
+            estudiantesD.insertarFinal(e4);
+            estudiantesD.insertarFinal(e5);
+            System.out.println(estudiantesD);
+        } catch (Exception e) {
+        }
+        
+        
         System.out.println("=> tamaño: " + estudiantesD.getTamanio());
         try{
             /*Eliminar el ultimo*/
@@ -676,4 +689,8 @@ public class Main {
         System.out.println(estudiantesC);
         System.out.println("=> tamaño: " + estudiantesC.getTamanio());
     }
+    
+    
+    ListaSimple<Estudiante> estudiantes = new ListaSimple<>(); //crear lista vacia
+    
 }

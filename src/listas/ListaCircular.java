@@ -133,7 +133,74 @@ public class ListaCircular<Tipo> {
         tamanio--;
         return this;
     }
+    /*------------------------------------- Insertar despues Nodo Buscado------------------------------------------------- */
+    public ListaCircular insertarDespuesElementoB(Tipo datoI, Tipo datoB) throws Exception{
+        if(primero != null){
+            NodoCircular nuevo = new NodoCircular(datoI);
+            NodoCircular aux = primero;
+            
+            while(!aux.getDato().equals(datoB)&& aux.getSiguiente()!= primero){
+                aux = aux.getSiguiente();
+            }
+            
+            if(aux.getDato().equals(datoB)){
+                nuevo.setSiguiente(aux.getSiguiente());
+                aux.setSiguiente(nuevo);
+            }
+            
+            else{
+                throw new Exception("Elemento no encontrado");
+            }
+        }
+        
+        else{
+            throw new Exception("Lista vacia");
+        }
+        return this;
+    }
+    /* */
+    public ListaCircular eliminarDespuesElementoB(Tipo datoB) throws Exception{
+        if(primero != null){
+            //Creaos nodos auxliares
+            NodoCircular aux = primero;
+            NodoCircular aux1 = null;
+            
+            if(primero.getDato().equals(datoB) && primero.getSiguiente() == primero){
+               throw new Exception("solo hay un elemento en la lista");
+            }
+            
+            //Mas de dos elementos
+            else{
+                //Ciclo para recorrer la lista
+                while(aux.getSiguiente()!= primero && aux.getDato() != datoB ){
+                        aux = aux.getSiguiente();
+                }
+                aux1 = aux.getSiguiente().getSiguiente();
+                
+                
+                //Elemento encontrado en el ultimo nodo
+                if(aux.getDato().equals(datoB) && aux.getSiguiente() == primero){
+                    elimimarPrimero();
+                }
+                
+                //Elemento no encontrado
+                else if(aux.getSiguiente() == primero){
+                    throw new Exception("no se encontro elelemnto");
 
+                }
+                //elemento en medio de la lista
+                else{
+                  aux.getSiguiente().setSiguiente(null);
+                  aux.setSiguiente(aux1);
+                  tamanio--;
+                }
+            }
+        }
+        else{
+            throw new Exception("lista vacia");
+        }
+        return this;
+    }
 
     /*------------------------------------- Recorrer------------------------------------------------- */
     private NodoCircular recorrerFinal(NodoCircular aux){
@@ -200,7 +267,17 @@ public class ListaCircular<Tipo> {
         return (Tipo) actual.getDato();
     }
 
-
+    public Tipo getElementoBuscado(Tipo datoB) throws Exception {
+        exceptionListaVacia("La lista esta vacia");
+        NodoCircular aux = primero;
+        while (!aux.getDato().equals(datoB) && aux.getSiguiente() != primero){
+            aux = aux.getSiguiente();
+        }
+        if (!aux.getDato().equals(datoB) ){
+            throw new Exception("No se encontro el elemento Buscado");
+        }
+        return (Tipo) aux.getDato();
+    }
 
 
 
