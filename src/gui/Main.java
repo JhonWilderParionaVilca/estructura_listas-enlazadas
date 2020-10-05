@@ -1331,7 +1331,7 @@ public class Main extends javax.swing.JFrame {
     private void btnEliminarInicioCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarInicioCActionPerformed
         try {
                 System.out.println("-----------------------------Eliminar por el primero Circular---------------------------------------");
-                estudiantesC.elimimarPrimero();
+                estudiantesC.eliminarPrimero();
                 System.out.println(estudiantesC);
 
                 //imprimir tabla
