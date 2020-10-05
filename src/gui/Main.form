@@ -836,6 +836,9 @@
                               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tableCircularMouseClicked"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="tableCircular = new javax.swing.JTable(){&#xa;    public boolean isCellEditable(int rowIndex, int colIndex){&#xa;        return false;&#xa;    }&#xa;};"/>
                           </AuxValues>
@@ -890,6 +893,7 @@
                             <Component class="javax.swing.JButton" name="btnInsertarPrimeroC">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Insertar Inicio"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertarPrimeroCActionPerformed"/>
@@ -898,6 +902,7 @@
                             <Component class="javax.swing.JButton" name="btnInsertarFinalC">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Insertar Final"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertarFinalCActionPerformed"/>
@@ -948,6 +953,7 @@
                               </Properties>
                               <Events>
                                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoCKeyTyped"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoCKeyReleased"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel21">
@@ -959,6 +965,7 @@
                               <Events>
                                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNombreCActionPerformed"/>
                                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreCKeyTyped"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNombreCKeyReleased"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel22">
@@ -969,6 +976,7 @@
                             <Component class="javax.swing.JTextField" name="txtApellidoC">
                               <Events>
                                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellidoCKeyTyped"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtApellidoCKeyReleased"/>
                               </Events>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel23">
@@ -979,6 +987,7 @@
                             <Component class="javax.swing.JTextField" name="txtEdadC">
                               <Events>
                                 <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEdadCKeyTyped"/>
+                                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtEdadCKeyReleased"/>
                               </Events>
                             </Component>
                           </SubComponents>
@@ -1003,10 +1012,13 @@
                             </Constraint>
                           </Constraints>
                         </Component>
-                        <Component class="javax.swing.JButton" name="jButton25">
+                        <Component class="javax.swing.JButton" name="btnEliminarBuscadoC">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Eliminar Elemento Buscado"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarBuscadoCActionPerformed"/>
+                          </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                               <BorderConstraints direction="Last"/>
@@ -1051,14 +1063,18 @@
                                     <Component class="javax.swing.JTextField" name="txtCodigoBC">
                                       <Events>
                                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoBCKeyTyped"/>
+                                        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCodigoBCKeyReleased"/>
                                       </Events>
                                     </Component>
                                   </SubComponents>
                                 </Container>
-                                <Component class="javax.swing.JButton" name="jButton26">
+                                <Component class="javax.swing.JButton" name="btnBuscarC">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Buscar"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarCActionPerformed"/>
+                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>
@@ -1071,25 +1087,39 @@
                                 <Property name="verticalGap" type="int" value="5"/>
                               </Layout>
                               <SubComponents>
-                                <Component class="javax.swing.JButton" name="jButton27">
+                                <Component class="javax.swing.JButton" name="btnInsertarAntesC">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Insertar Antes"/>
+                                    <Property name="enabled" type="boolean" value="false"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertarAntesCActionPerformed"/>
+                                  </Events>
                                 </Component>
-                                <Component class="javax.swing.JButton" name="jButton28">
+                                <Component class="javax.swing.JButton" name="btnInsertarDespuesC">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Insertar Despues"/>
+                                    <Property name="enabled" type="boolean" value="false"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInsertarDespuesCActionPerformed"/>
+                                  </Events>
                                 </Component>
-                                <Component class="javax.swing.JButton" name="jButton29">
+                                <Component class="javax.swing.JButton" name="btnEliminarAntesC">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Eliminar Antes"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarAntesCActionPerformed"/>
+                                  </Events>
                                 </Component>
-                                <Component class="javax.swing.JButton" name="jButton30">
+                                <Component class="javax.swing.JButton" name="btnEliminarDespuesC">
                                   <Properties>
                                     <Property name="text" type="java.lang.String" value="Eliminar Despues"/>
                                   </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarDespuesCActionPerformed"/>
+                                  </Events>
                                 </Component>
                               </SubComponents>
                             </Container>

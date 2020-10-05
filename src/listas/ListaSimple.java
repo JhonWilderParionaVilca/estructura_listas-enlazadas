@@ -152,11 +152,12 @@ public class ListaSimple<Tipo> {
         datoIUnico(datoI);
         NodoSimple nuevo = new NodoSimple(datoI);
         NodoSimple aux = primero;
-        if (!primero.getDato().equals(datoB)) {
-            aux = recorrerUnNodoAnteriorElementoB(aux, datoB);
-            //posicionarnos en el nodo buscado
-            aux = aux.getSiguiente();
-        }
+//        if (!primero.getDato().equals(datoB)) {
+//            aux = recorrerUnNodoAnteriorElementoB(aux, datoB);
+//            //posicionarnos en el nodo buscado
+//            aux = aux.getSiguiente();
+//        }
+        aux = recorrerElementoBuscado(aux, datoB);
         if (aux.getSiguiente() != null){ /*si existe mas de un nodo*/
             nuevo.setSiguiente(aux.getSiguiente());
         }

@@ -62,12 +62,7 @@ public class Estudiante {
                 '}';
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.codigo);
-        return hash;
-    }
+
 
     @Override
     public boolean equals(Object obj) {
