@@ -7,13 +7,17 @@ public class ListaDoble<Tipo> {
     public ListaDoble() {
         this.primero = null;
     }
+    
+    private boolean esVacia(){
+        return primero == null;
+    }
 
     /*------------------------------------- insertar por el primero------------------------------------------------- */
     public ListaDoble insertarPrimero(Tipo dato) throws Exception{
         datoIUnico(dato);
         NodoDoble nuevo = new NodoDoble(dato);
-        if (primero != null){ /* Si la lista no esta vacia */
-            nuevo.setSiguiente(primero); /*modificador*/
+        if (!esVacia()){
+            nuevo.setSiguiente(primero);
             primero.setAnterior(nuevo);
         }
         primero = nuevo;
@@ -24,11 +28,12 @@ public class ListaDoble<Tipo> {
     /*----------------------------------------Eliminar por el primero --------------------------------------------- */
     public ListaDoble eliminarPrimero() throws Exception {
         exeptionListaVacia();
-        if ( primero.getSiguiente() != null){ /*si la lista tiene mas de un elemento*/
+        if ( primero.getSiguiente() != null){
             primero = primero.getSiguiente();
             primero.getAnterior().setSiguiente(null);
             primero.setAnterior(null);
         }else{
+            /**si tiene un solo nodo */
             primero = null;
         }
         tamanio--;
@@ -38,7 +43,8 @@ public class ListaDoble<Tipo> {
     public ListaDoble insertarFinal(Tipo dato) throws Exception{
         datoIUnico(dato);
         NodoDoble nuevo = new NodoDoble(dato);
-        if (primero != null){ /* Si la lista no esta vacia */
+        
+        if (!esVacia()){
             NodoDoble aux = primero;
             aux = recorrerFinal(aux);
 
@@ -54,13 +60,15 @@ public class ListaDoble<Tipo> {
     /*-----------------------------Eliminar final--------------------------------------------------------*/
     public ListaDoble eliminarFinal() throws Exception {
         exeptionListaVacia();
-        NodoDoble aux= primero;
-        aux = recorrerFinal(aux);
+        
         if (primero.getSiguiente() != null){
-            aux = aux.getAnterior();
-            aux.getSiguiente().setAnterior(null);
-            aux.setSiguiente(null);
+            NodoDoble aux= primero;
+            aux = recorrerFinal(aux);
+            
+            aux.getAnterior().setSiguiente(null);
+            aux.setAnterior(null);
         }else{
+            /*solo hay un nodo*/
             primero = null;
         }
         tamanio--;
@@ -70,49 +78,46 @@ public class ListaDoble<Tipo> {
     public ListaDoble eliminarElementoBuscado(Tipo datoB) throws Exception {
         exeptionListaVacia();
         NodoDoble aux = primero;
-        aux = recorrerElementoBuscado(aux, datoB);/*Si existe devuelve el elemnto en esa posicion caso contrario retorna excepcion*/
-        eliminarNodoActual(aux);
-        tamanio--;
+        aux = recorrerElementoBuscado(aux, datoB);
+        eliminarNodoEncontrado(aux);
         return this;
     }
 
     /*---------------------------------------Insertar Antes Elemento Buscado------------------------------------------*/
     public ListaDoble insertarAntesElementoB(Tipo datoI, Tipo datoB) throws Exception {
-        exeptionListaVacia(); /*No se puede insertar antes de una lista vacia*/
+        exeptionListaVacia();
         datoIUnico(datoI);
+        
         NodoDoble nuevo = new NodoDoble(datoI);
         NodoDoble aux = primero;
-        aux = recorrerElementoBuscado(aux, datoB);/*Si existe devuelve el elemnto en esa posicion caso contrario retorna excepcion*/
-        //System.out.println(aux.getDato());
-        if (aux.getAnterior() != null){
-            /*si el nodo buscado es el intermedio o final*/
+        aux = recorrerElementoBuscado(aux, datoB);
+        
+        if (aux.getAnterior() == null) {
+            /*primer nodo*/
+            insertarPrimero(datoI);
+        }else{
             aux.getAnterior().setSiguiente(nuevo);
             nuevo.setAnterior(aux.getAnterior());
-        }else{
-            /*Si el nodo buscado es el primero*/
-            primero = nuevo;
-            //System.out.println("es el primero el buscado");
+            nuevo.setSiguiente(aux);
+            aux.setAnterior(nuevo);
+            tamanio++;
         }
-        nuevo.setSiguiente(aux);
-        aux.setAnterior(nuevo);
-
-        tamanio++;
         return this;
+        
     }
     /*---------------------------------------Eliminar Antes Elemento Buscado------------------------------------------*/
     public ListaDoble eliminarAntesElementoB(Tipo datoB) throws Exception {
         exeptionListaVacia();
+        
         NodoDoble aux = primero;
         aux = recorrerElementoBuscado(aux, datoB);
 
         if (aux.getAnterior() != null){
             aux = aux.getAnterior(); /*nos posicionamos en el nodo q queremos eliminar*/
-            eliminarNodoActual(aux);
+            eliminarNodoEncontrado(aux);
         }else {
             throw new Exception("No se puede eliminar antes del primer nodo");
         }
-
-        tamanio--;
         return this;
     }
     /*---------------------------------------Insertar despues Elemento Buscado------------------------------------------*/
@@ -140,12 +145,10 @@ public class ListaDoble<Tipo> {
 
         if (aux.getSiguiente() != null){
             aux = aux.getSiguiente(); /*nos posicionamos en el nodo q queremos eliminar*/
-            eliminarNodoActual(aux);
+            eliminarNodoEncontrado(aux);
         }else {
             throw new Exception("No se puede eliminar despues del ultimo nodo");
         }
-
-        tamanio--;
         return this;
     }
 
@@ -156,26 +159,19 @@ public class ListaDoble<Tipo> {
             throw new Exception("La lista esta vacia");
         }
     }
-
-    private void eliminarNodoActual(NodoDoble aux){
-        if (primero.getSiguiente() != null){ /*Si tiene mas de un elemento*/
-            if (aux.getAnterior() != null && aux.getSiguiente() != null){
-                /*eliminar un nodo intermedio*/
-                aux.getAnterior().setSiguiente(aux.getSiguiente());
-                aux.getSiguiente().setAnterior(aux.getAnterior());
-                aux.setAnterior(null);
-            }else if (aux.getAnterior() == null){
-                /*Eliminar el primer nodo*/
-                primero = aux.getSiguiente();
-                aux.getSiguiente().setAnterior(null);
-            }else {
-                /*el ultimo nodo*/
-                aux = aux.getAnterior();
-                aux.getSiguiente().setAnterior(null);
-            }
-            aux.setSiguiente(null);
+    
+    private void eliminarNodoEncontrado(NodoDoble aux) throws Exception{
+        if(aux.getAnterior() == null){
+            System.out.println("eliminar primero");
+            eliminarPrimero();
+        }else if(aux.getSiguiente() == null){
+            eliminarFinal();
         }else{
-            primero = null;
+            /*eliminar un nodo intermedio*/
+            aux.getAnterior().setSiguiente(aux.getSiguiente());
+            aux.getSiguiente().setAnterior(aux.getAnterior());
+            aux.setAnterior(null);
+            tamanio--;
         }
     }
 

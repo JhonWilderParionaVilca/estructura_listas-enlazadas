@@ -22,8 +22,8 @@ public class ListaSimple<Tipo> {
     public ListaSimple insertarPrimero(Tipo dato) throws Exception{
         datoIUnico(dato);
         NodoSimple nuevo = new NodoSimple(dato);
-        if (!esVacio()){ /* Si la lista no esta vacia */
-            nuevo.setSiguiente(primero); /*modificador*/
+        if (!esVacio()){
+            nuevo.setSiguiente(primero);
         }
         primero = nuevo;
         tamanio++;
@@ -31,12 +31,13 @@ public class ListaSimple<Tipo> {
     }
     /*----------------------------------------Eliminar por el primero --------------------------------------------- */
     public ListaSimple eliminarPrimero() throws Exception {
-        exeptionListaVacia();
-        NodoSimple auxiliar;
-        auxiliar = primero;
+        exeptionListaVacia("No se puede eliminar la lista Simple está vacia");
+        
         if ( primero.getSiguiente() != null){ /*si la lista tiene mas de un elemento*/
-            primero = auxiliar.getSiguiente();
-            auxiliar.setSiguiente(null);
+            NodoSimple aux;
+            aux = primero;
+            primero = aux.getSiguiente();
+            aux.setSiguiente(null);
         }else{
             primero = null;
         }
@@ -49,13 +50,7 @@ public class ListaSimple<Tipo> {
         NodoSimple nuevo = new NodoSimple(dato);
         if (!esVacio()){
             NodoSimple auxiliar= primero;
-            auxiliar = recorrerUnoAntesFinal(auxiliar);
-            //si auxiliar apunta a null eso quiere decir que solo hay un nodo
-            if (auxiliar.getSiguiente() != null){
-                //apuntamos al ultimo nodo
-                auxiliar = auxiliar.getSiguiente();
-            }
-
+            auxiliar = recorrerFinal(auxiliar);
             auxiliar.setSiguiente(nuevo);
         }else{
             primero = nuevo;
@@ -65,7 +60,7 @@ public class ListaSimple<Tipo> {
     }
     /* -----------------------------------Eliminar final-------------------------------------------------------------*/
     public ListaSimple eliminarFinal() throws Exception {
-        exeptionListaVacia();
+        exeptionListaVacia("la lista esta vacia no hay nodos");
         NodoSimple auxiliar= primero;
         //si la lista tiene un solo nodo retorna ese sino retorna un nodo antes del final
         auxiliar = recorrerUnoAntesFinal(auxiliar);
@@ -82,7 +77,7 @@ public class ListaSimple<Tipo> {
 
     /* -----------------------------------Eliminar elemento buscado---------------------------------------------------*/
     public ListaSimple eliminarElementoBuscado(Tipo datoB) throws Exception {
-        exeptionListaVacia();
+        exeptionListaVacia("la lista esta vacia no se puede buscar para eliminar");
         NodoSimple aux = primero;
         aux = recorrerUnNodoAnteriorElementoB(aux, datoB);
         //si solo tiene un nodo
@@ -106,7 +101,7 @@ public class ListaSimple<Tipo> {
 
     /* -----------------------------------Insertar antes elemento buscado---------------------------------------------*/
     public ListaSimple insertarAntesElementoBuscado(Tipo datoInsertar, Tipo datoBuscado) throws Exception {
-        exeptionListaVacia();
+        exeptionListaVacia("la lista esta vacia no se puede buscar para insertar");
         datoIUnico(datoInsertar);
         NodoSimple nuevo = new NodoSimple(datoInsertar);
         NodoSimple aux = primero;
@@ -125,7 +120,7 @@ public class ListaSimple<Tipo> {
     }
     /*----------------------------------Eliminar antes elemento buscado-----------------------------------------------*/
     public ListaSimple eliminarAntesElementoBuscado(Tipo datoB) throws Exception {
-        exeptionListaVacia();
+        exeptionListaVacia("La lista esta vacia no se puede buscar para eliminar");
         NodoSimple aux = primero;
         aux = recorrerDosNodoAnteriorElementoB(aux, datoB);
         //si solo tiene un nodo o el nodo buscado es el primero
@@ -148,7 +143,7 @@ public class ListaSimple<Tipo> {
     }
     /* ---------------------------------Insertar despues elemento buscado---------------------------------------------*/
     public ListaSimple insertarDespuesElementoBuscado(Tipo datoI, Tipo datoB) throws Exception {
-        exeptionListaVacia();
+        exeptionListaVacia("la lista esta vacia no se puede buscar para insertar");
         datoIUnico(datoI);
         NodoSimple nuevo = new NodoSimple(datoI);
         NodoSimple aux = primero;
@@ -167,7 +162,7 @@ public class ListaSimple<Tipo> {
     }
     /* ---------------------------------Eliminar despues elemento buscado---------------------------------------------*/
     public ListaSimple eliminarDespuesElementoBuscado(Tipo datoB) throws Exception {
-        exeptionListaVacia();
+        exeptionListaVacia("La lista esta vacia no se puede buscar");
         NodoSimple aux = primero;
         aux = recorrerElementoBuscado(aux, datoB);
         if (aux.getSiguiente() != null){/*si no tiene un solo nodo o no se encuentre en el nodo final*/
@@ -205,11 +200,22 @@ public class ListaSimple<Tipo> {
         return salida;
     }
     /*------------------------------------utils----------------------------------------------------------------*/
-    public void exeptionListaVacia() throws Exception {
+    public void exeptionListaVacia(String msg) throws Exception {
         if (esVacio()){
-            throw new Exception("La lista esta vacia");
+            throw new Exception(msg);
         }
     }
+    
+    public NodoSimple recorrerFinal(NodoSimple aux){
+        //precondicion la lista no debe de estar vacia
+       
+        while (aux.getSiguiente() != null){
+            aux = aux.getSiguiente();
+        }
+        
+        return aux;
+    }
+    
     public NodoSimple recorrerUnoAntesFinal(NodoSimple aux){
         //precondicion la lista no debe de estar vacia
         //si son mas de 1 elemento
@@ -279,7 +285,7 @@ public class ListaSimple<Tipo> {
         return (Tipo) actual.getDato();
     }
     public Tipo getElementoBuscado(Tipo datoB) throws Exception {
-        exeptionListaVacia();
+        exeptionListaVacia("la lista esta vacia no se puede buscar");
         NodoSimple aux = primero;
         while (!aux.getDato().equals(datoB) && aux.getSiguiente() != null){
             aux = aux.getSiguiente();

@@ -14,11 +14,9 @@ public class ListaCircular<Tipo> {
         exceptionDatoDuplicado(datoI);
         NodoCircular nuevo = new NodoCircular(datoI);
         if (primero != null) {
-            /*Si la lista no esta vacia*/
             NodoCircular aux = primero;
             aux = recorrerFinal(aux);
-            /*El ultimo nodo debe apuntar al nuevo nodo insertado*/
-
+            
             nuevo.setSiguiente(primero);
             aux.setSiguiente(nuevo);
         }
@@ -31,13 +29,11 @@ public class ListaCircular<Tipo> {
     public ListaCircular eliminarPrimero() throws Exception {
         exceptionListaVacia("No se puede eliminar. La lista esta vacia");
         if (primero.getSiguiente() != primero) {
-            NodoCircular auxFinal = primero;
-            NodoCircular auxPrimero = auxFinal;
-            auxFinal = recorrerFinal(auxFinal);
-
-            primero = auxPrimero.getSiguiente();
-            auxFinal.setSiguiente(primero);
-            auxPrimero.setSiguiente(null);
+            NodoCircular aux = primero;
+            aux = recorrerFinal(aux);
+            primero = primero.getSiguiente();
+            aux.getSiguiente().setSiguiente(null);
+            aux.setSiguiente(primero);
 
         } else {
             /*si solo hay un nodo*/
@@ -54,9 +50,10 @@ public class ListaCircular<Tipo> {
         if (primero != null) {
             NodoCircular aux = primero;
             aux = recorrerFinal(aux);
-
-            nuevo.setSiguiente(aux.getSiguiente());/*Apunte al primer nodo*/
+            
             aux.setSiguiente(nuevo);
+            nuevo.setSiguiente(primero);
+            
         } else {
             /*si la lista esta vacia*/
             primero = nuevo;
@@ -70,13 +67,10 @@ public class ListaCircular<Tipo> {
         exceptionListaVacia("No se puede eliminar una lista circular vacia");
         if (primero.getSiguiente() != primero) {
             NodoCircular aux = primero;
-            NodoCircular aux1 = aux;
-            aux = recorrerFinal(aux);
-            aux1 = recorrerUnoAntesFinal(aux1);
+            aux = recorrerUnoAntesFinal(aux);
 
-            aux1.setSiguiente(aux.getSiguiente());
-            /*Apunta al primer nodo*/
-            aux.setSiguiente(null);
+            aux.getSiguiente().setSiguiente(null);
+            aux.setSiguiente(primero);
 
         } else {
             /*si solo tiene un nodo*/
@@ -89,23 +83,19 @@ public class ListaCircular<Tipo> {
     /*------------------------------------- Eliminar Nodo Buscado------------------------------------------------- */
     public ListaCircular eliminarElementoBuscado(Tipo datoB) throws Exception {
         exceptionListaVacia("No se puede eliminar elelemnto buscado en lista Circular vacia");
+        NodoCircular aux = primero;
+        aux = recorrerUnNodoAntesBuscado(aux, datoB);
 
-        NodoCircular aux1 = primero;
-        aux1 = recorrerUnNodoAntesBuscado(aux1, datoB);
-        /*si el buscado es el primero retornara el primero*/
-        System.out.println("aux1 = " + aux1.getDato());
-        if (aux1.getDato().equals(datoB)) {
-            /*Si el primer nodo es el buscado*/
+        if (aux.getDato().equals(datoB)) {
             eliminarPrimero();
-        } else if (aux1.getSiguiente().getSiguiente() == primero) {
+        } else if (aux.getSiguiente().getSiguiente() == primero) {
             eliminarFinal();
         } else {
             /*eliminar intermedio*/
-            NodoCircular aux = aux1;
-            aux = aux1.getSiguiente();
-            /*Apunta al nodo buscado*/
-            aux1.setSiguiente(aux.getSiguiente());
-            aux.setSiguiente(null);
+            NodoCircular aux1 = aux.getSiguiente();
+            
+            aux.setSiguiente(aux1.getSiguiente());
+            aux1.setSiguiente(null);
             tamanio--;
         }
         return this;
@@ -115,15 +105,16 @@ public class ListaCircular<Tipo> {
     public ListaCircular insertarAntesElementoB(Tipo datoI, Tipo datoB) throws Exception {
         exceptionListaVacia("no se puede insertar antes de una lista vacia");
         exceptionDatoDuplicado(datoI);
-        NodoCircular aux1 = primero;
-        aux1 = recorrerUnNodoAntesBuscado(aux1, datoB);
-
-        if (aux1.getDato().equals(datoB)) {
+        
+        if (primero.getDato().equals(datoB)) {
             insertarPrimero(datoI);
         } else {
+            NodoCircular aux = primero;
+            aux = recorrerUnNodoAntesBuscado(aux, datoB);
             NodoCircular nuevo = new NodoCircular(datoI);
-            nuevo.setSiguiente(aux1.getSiguiente());
-            aux1.setSiguiente(nuevo);
+            
+            nuevo.setSiguiente(aux.getSiguiente());
+            aux.setSiguiente(nuevo);
             tamanio++;
         }
         return this;
@@ -133,28 +124,26 @@ public class ListaCircular<Tipo> {
     public ListaCircular eliminarAntesElementoB(Tipo datoB) throws Exception {
         exceptionListaVacia("No se puede eliminar antes en una lista vacia Circular");
 
-        NodoCircular aux1 = primero;
-        NodoCircular aux = aux1;
-        aux = recorrerFinal(aux);
-        aux1 = recorrerDosAntesElementoBuscado(aux1, datoB);
-        /*si el buscado es el primero o segundo retornara el primero*/
-
-        if (!aux1.getDato().equals(datoB)) {
-            /*Si no tiene un solo nodo*/
-            if (!aux1.getSiguiente().getDato().equals(datoB)) {
-                /*si no es el segundo nodo*/
-                NodoCircular auxAnterior = aux1;
-                aux1 = aux1.getSiguiente();
-                /*posicionamos en el nodo a eliminar*/
-                auxAnterior.setSiguiente(aux1.getSiguiente());
-            } else {
-                /*eliminar el segundo nodo*/
-                primero = aux1.getSiguiente();
-                aux.setSiguiente(primero);
+        if (!primero.getDato().equals(datoB)) {
+            NodoCircular aux = primero;
+            aux = recorrerDosAntesElementoBuscado(aux, datoB);
+            System.out.println("aux = " + aux);
+            NodoCircular aux1;
+            
+            if (!aux.getSiguiente().getDato().equals(datoB)) {
+                aux1 = aux.getSiguiente();
+                aux.setSiguiente(aux1.getSiguiente());
+                aux1.setSiguiente(null);
+            }else{
+                /*El nodo buscado es el segundo*/
+                aux1 = recorrerFinal(aux);
+                primero = aux.getSiguiente();
+                aux.setSiguiente(null);
+                aux1.setSiguiente(primero);
             }
-            aux1.setSiguiente(null);
         } else {
-            throw new Exception("No existe un nodo antes de " + aux1.getDato());
+            /*si el nodo buscado es el primero*/
+            throw new Exception("No existe un nodo antes de " + primero.getDato());
         }
         tamanio--;
         return this;
@@ -167,27 +156,29 @@ public class ListaCircular<Tipo> {
 
         NodoCircular nuevo = new NodoCircular(datoI);
         NodoCircular aux = primero;
-
         aux = recorrerElementoBuscado(aux, datoB);
+        
         nuevo.setSiguiente(aux.getSiguiente());
         aux.setSiguiente(nuevo);
 
         tamanio++;
         return this;
     }
-
+    /*------------------------------------- Insertar despues Nodo Buscado------------------------------------------------- */
     public ListaCircular eliminarDespuesElementoB(Tipo datoB) throws Exception {
         exceptionListaVacia("No se puede eliminar en una lista circular vacia");
         //Creaos nodos auxliares
         NodoCircular aux = primero;
         aux = recorrerElementoBuscado(aux, datoB);
         
-        if (aux.getSiguiente() != primero) {/*Si solo tiene un nodo o el buscado es el ultimo*/
-            NodoCircular aux1 = aux;
-            aux = aux.getSiguiente();
-            aux1.setSiguiente(aux.getSiguiente());
-            aux.setSiguiente(null);
+        if (aux.getSiguiente() != primero) {
+            NodoCircular aux1 = aux.getSiguiente();
+            
+            aux.setSiguiente(aux1.getSiguiente());
+            aux1.setSiguiente(null);
+            
         }else {
+            /*si tiene un solo nodo y el buscado es eso o el buscado es el ultimo*/
             throw new Exception("No hay un elemento despues de " + aux.getDato());
         }
         tamanio--;
